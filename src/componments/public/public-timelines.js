@@ -6,10 +6,12 @@ const siteUrl = 'https://mastodon.social/api/v1/timelines/public'
 
 function PublicTimelines() {
     const [data, setData] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios.get(siteUrl)
             .then(res => {
+                setIsLoading(false)
                 setData(res.data)
             })
             .catch(err => {
@@ -20,7 +22,7 @@ function PublicTimelines() {
     console.log(data)
     return (
         <>
-            <section className="dudu-layout">
+            {isLoading ? <div className="loading">Loading...</div> : <section className="dudu-layout">
             {data.map((items, idx) => {
                 return (
                     <div key={idx}>
@@ -43,7 +45,7 @@ function PublicTimelines() {
                     </div>
                 )
             })}
-            </section>
+            </section>}
         </>
     )
 }
