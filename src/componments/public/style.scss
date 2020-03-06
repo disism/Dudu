@@ -1,0 +1,38 @@
+.public-body {
+  background-color: #191b22;
+}
+
+/*
+  Public Timelines
+ */
+.dudu-layout {
+  display: grid;
+  grid-gap: 1rem 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.dudu-conents {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  color: white;
+  background-color: #393f4f;
+  margin-bottom: 1rem;
+  a {
+    color: white;
+    &:visited {
+      color: white;
+    }
+  }
+  .dudu-conents-header {
+    display: flex;
+
+    img {
+      border-radius: 0.5rem;
+      width: 5rem;
+      height: 5rem;
+    }
+
+    .dudu-conents-header-username {
+      margin-left: 1rem;
+    }
+  }
+}
