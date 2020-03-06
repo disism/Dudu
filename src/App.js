@@ -1,10 +1,11 @@
 import React from 'react';
-import PublicDta from "./componments/public-data";
+import PublicComponent from "./componments/public";
+import "./assets/scss/global.scss"
 
 function App() {
   return (
     <>
-        <PublicDta/>
+        <PublicComponent />
     </>
   );
 }
