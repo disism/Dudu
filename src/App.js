@@ -25,7 +25,7 @@ function App() {
 
               <Route path="/" exact component={PublicPage} />
               <Route path="/login" component={LoginPage} />
-              <Route path="/account/:id" component={AccountsEntity} />
+              <Route path="/account/:id/statuses" component={AccountsEntity} />
           </Router>
       </>
   );

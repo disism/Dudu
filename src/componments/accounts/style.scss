@@ -1,0 +1,24 @@
+.entity-header-image {
+  margin: 1rem;
+  img {
+    border-radius: 0.5rem;
+    width: 100%;
+  }
+}
+
+.account-content {
+  margin: 1rem;
+  .entity-avatar {
+    img {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 0.5rem;
+    }
+  }
+  .account-noto {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid salmon;
+    border-radius: 0.5rem;
+  }
+}

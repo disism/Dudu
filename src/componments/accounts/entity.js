@@ -1,12 +1,20 @@
 import React, {useEffect, useState} from "react";
 import {getAccountsEntity} from "../../api/request";
+import DuduArticle from "../dudu-acticle";
+import "./style.scss"
 
 function AccountsEntity( props ) {
-    const [data, setData] = useState({})
-    console.log(props)
+    const [data, setData] = useState(
+        [
+            {
+                account: {}
+            }
+        ]
+    )
+
     const id = props.match.params.id
     useEffect(() => {
-        getAccountsEntity(id)
+        getAccountsEntity(`${id}/statuses`)
             .then(res => {
                 setData(res)
             })
@@ -15,42 +23,40 @@ function AccountsEntity( props ) {
             })
     },[id])
 
-    console.log(data)
-    const fields = data.fields
+
+    const account = data[0].account
 
     return (
         <section style={{color: `white`}}>
-            <div>
-                <img src={data.header} alt="" />
+            <div className="entity-header-image">
+                <img src={account.header} alt="" />
             </div>
-            <div>名字：{data.display_name}</div>
-            <div>域：{data.acct}</div>
-            <div>
-                个人简介：
-                <div dangerouslySetInnerHTML={{__html:data.note}}></div>
-            </div>
-            <div>加入于： {data.created_at}</div>
-            <div>
-                <img src={data.avatar} alt=""/>
-            </div>
-            <div>
 
-            </div>
-            <div>关注者：{data.followers_count}</div>
-            <div>正在关注： {data.following_count}</div>
-            <div>嘟文： {data.statuses_count}</div>
-            <div>最后更新时间： {data.last_status_at}</div>
+            <section className="account-content">
+                <div className="entity-avatar">
+                    <img src={account.avatar} alt=""/>
+                </div>
+                <div>名字：{account.display_name}</div>
+                <div>域：{account.acct}</div>
+                <div className="account-noto">
+                    个人简介：
+                    <div dangerouslySetInnerHTML={{__html:account.note}}></div>
+                </div>
+                <div>加入于： {account.created_at}</div>
+                <div>
 
-            <div>
-                领域：
-                {fields && fields.map((items, idx) => {
-                    return (
-                        <div  key={idx}>
-                            {items.name} - {items.value}
-                        </div>
-                    )
-                })}
-            </div>
+                </div>
+                <div>关注者：{account.followers_count}</div>
+                <div>正在关注： {account.following_count}</div>
+                <div>嘟文： {account.statuses_count}</div>
+                <div>最后更新时间： {account.last_status_at}</div>
+
+
+            </section>
+
+            <section>
+                <DuduArticle fetchData={data} />
+            </section>
         </section>
     )
 }
