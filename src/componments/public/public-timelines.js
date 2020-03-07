@@ -1,51 +1,55 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios"
-
-
-const siteUrl = 'https://mastodon.social/api/v1/timelines/public'
+import { getPublicTimeline } from "../../api/request";
+import {Link} from "react-router-dom";
 
 function PublicTimelines() {
     const [data, setData] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+
+    const fetchData = async () => {
+        try {
+            const res = await getPublicTimeline()
+            setData(res)
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     useEffect(() => {
-        axios.get(siteUrl)
-            .then(res => {
-                setIsLoading(false)
-                setData(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        fetchData()
     },[])
 
     console.log(data)
     return (
         <>
-            {isLoading ? <div className="loading">Loading...</div> : <section className="dudu-layout">
+            <section className="dudu-layout">
             {data.map((items, idx) => {
                 return (
                     <div key={idx}>
                         <div className="dudu-conents">
                             <div className="dudu-conents-header">
-                                <img src={items.account.avatar_static} alt="" />
+                                <img src={items.account.avatar} alt="" />
                                 <div className="dudu-conents-header-username">
-                                    <div>用户名：
-                                        <a href={items.account.url}>
+                                    <div>
+                                        <Link to={`/account/${items.account.id}`}>
                                             {items.account.display_name}
-                                        </a>
+                                        </Link>
                                     </div>
-                                    <div>@{items.account.acct}</div>
+                                    <div className="dudu-conents-header-at">
+                                        {items.account.acct}
+                                    </div>
                                 </div>
                             </div>
                             <div>嘟文</div>
                             <div dangerouslySetInnerHTML={{__html:items.content}}></div>
                             <a href={items.url}>嘟文链接</a>
+                            <div>{items.created_at}</div>
+                            <div>回复: {items.replies_count}</div>
+                            <div>收藏: {items.favourites_count}</div>
                         </div>
                     </div>
                 )
             })}
-            </section>}
+            </section>
         </>
     )
 }

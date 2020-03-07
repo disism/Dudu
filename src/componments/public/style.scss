@@ -1,14 +1,3 @@
-.public-body {
-  background-color: #191b22;
-}
-.loading {
-  width: 100%;
-  height: 100vw;
-  background-color: antiquewhite;
-  color: black;
-  text-align: center;
-  font-size: 5rem;
-}
 /*
   Public Timelines
  */
@@ -28,6 +17,9 @@
     &:visited {
       color: white;
     }
+    span {
+      white-space: normal;
+    }
   }
   .dudu-conents-header {
     display: flex;
@@ -40,6 +32,9 @@
 
     .dudu-conents-header-username {
       margin-left: 1rem;
+      .dudu-conents-header-at {
+        font-size: 0.85rem;
+      }
     }
   }
 }
