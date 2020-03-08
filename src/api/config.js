@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const baseUrl = 'https://mastodon.social/api/v1'
+export const baseUrl = 'https://mastodon.social'
 
 const axiosInstance = axios.create({
     baseURL: baseUrl

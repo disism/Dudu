@@ -1,8 +1,13 @@
 import {Link} from "react-router-dom";
 import React from "react";
 import "./style.scss"
-/*
-    <DuduArticle fetchData={} />
+
+/***
+ * 发布动态的卡片组件
+ * 调用该组件方法： <DuduArticle fetchData={} />
+ * @param fetchData
+ * @returns {*}
+ * @constructor
  */
 const DuduArticle =　({fetchData}) => {
     return (
@@ -15,6 +20,7 @@ const DuduArticle =　({fetchData}) => {
                                 <img src={items.account.avatar} alt="" />
                                 <div className="dudu-conents-header-username">
                                     <div>
+                                        {/*点击进入 /account/:id/statuses  在总路由中设置传递的组件*/}
                                         <Link to={`/account/${items.account.id}/statuses`}>
                                             {items.account.display_name}
                                         </Link>
