@@ -14,6 +14,7 @@ import {
 import PublicPage from "./pages/public";
 import LoginPage from "./pages/login";
 import AccountsEntity from "./componments/accounts/entity";
+import AuthPage from "./pages/auth";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
 
               <Route path="/" exact component={PublicPage} />
               <Route path="/login" component={LoginPage} />
+              <Route path="/auth" component={AuthPage} />
               {/*设置动态 id 并传递给 AccountsEntity 组件*/}
               <Route path="/account/:id/statuses" component={AccountsEntity} />
           </Router>
