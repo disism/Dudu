@@ -1,0 +1,13 @@
+/*
+  Public Layout
+ */
+@import "var.scss";
+
+.public-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @media (max-width: $mobile) {
+    flex-direction: column;
+  }
+}

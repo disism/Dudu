@@ -1,51 +1,40 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios"
+import { getPublicTimeline } from "../../api/request";
+import DuduArticle from "../dudu-acticle";
 
-
-const siteUrl = 'https://mastodon.social/api/v1/timelines/public'
+/***
+ * PublicTimelines Components
+ * @returns {*}
+ * @constructor
+ */
 
 function PublicTimelines() {
     const [data, setData] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
 
+    const fetchData = async () => {
+        try {
+            const res = await getPublicTimeline()
+            setData(res)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    /***
+     * useEffect use async/await
+     */
     useEffect(() => {
-        axios.get(siteUrl)
-            .then(res => {
-                setIsLoading(false)
-                setData(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        fetchData()
     },[])
 
-    console.log(data)
+    /***
+     * console.log(data)
+     * Public Timeline Data
+     */
     return (
         <>
-            {isLoading ? <div className="loading">Loading...</div> : <section className="dudu-layout">
-            {data.map((items, idx) => {
-                return (
-                    <div key={idx}>
-                        <div className="dudu-conents">
-                            <div className="dudu-conents-header">
-                                <img src={items.account.avatar_static} alt="" />
-                                <div className="dudu-conents-header-username">
-                                    <div>用户名：
-                                        <a href={items.account.url}>
-                                            {items.account.display_name}
-                                        </a>
-                                    </div>
-                                    <div>@{items.account.acct}</div>
-                                </div>
-                            </div>
-                            <div>嘟文</div>
-                            <div dangerouslySetInnerHTML={{__html:items.content}}></div>
-                            <a href={items.url}>嘟文链接</a>
-                        </div>
-                    </div>
-                )
-            })}
-            </section>}
+            {/* 调用 Duduarticle 把 data 数据传给 fetchData */}
+            <DuduArticle fetchData={data}/>
         </>
     )
 }
