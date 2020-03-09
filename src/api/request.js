@@ -16,15 +16,8 @@ export const getAccountsEntity = (id) => axiosInstance.get(`/api/v1/accounts/${i
  * @returns {Promise<AxiosResponse<T>>}
  */
 export const getTendsData = () => axiosInstance.get('/api/v1/trends')
-/***
- * Login POST Register Application
- * 开始注册客户端
- * @returns {Promise<AxiosResponse<T>>}
- */
-export const postRegisterApplication = () => axiosInstance.post('/api/v1/apps', {
-    client_name: 'Test Application',
-    redirect_uris: 'urn:ietf:wg:oauth:2.0:oob'
-})
+
+
 /***
  * POST Get APP Token
  */

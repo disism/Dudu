@@ -1,7 +1,10 @@
 import axios from "axios"
 
 export const baseUrl = 'https://mastodon.social'
-
+/***
+ *  默认的请求
+ * @type {AxiosInstance}
+ */
 const axiosInstance = axios.create({
     baseURL: baseUrl
 })
