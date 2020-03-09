@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import "../assets/scss/login.scss"
 import axios from "axios"
+import {Link} from "react-router-dom";
+
 /***
  * Login Page, Input domain -> login OAuth2
  * @returns {*}
@@ -9,8 +11,11 @@ import axios from "axios"
 function LoginPage() {
     const [example, setExample] = useState('mastodon.social')
     const requestUrl = `https://${example}`
+    // 授权码状态
+    const [code, setCode] = useState('')
     // 账户实体数据
     const [accountsEntity, setAccountsEntity] = useState({})
+
     /***
      * 创建应用程序
      */
@@ -46,19 +51,20 @@ function LoginPage() {
                 console.log(res.data)
                 localStorage.setItem('dudu_client_token', `${res.data.access_token}`)
                 // 存完 Token 跳转到授权页
-                jumpMastodon(clientData)
+                const authParams = [
+                    `${requestUrl}/oauth/authorize?client_id=${clientData.client_id}`,
+                    `scope=read+write+follow+push`,
+                    `redirect_uri=urn:ietf:wg:oauth:2.0:oob`,
+                    `response_type=code`
+                ].join("&")
+                window.open(authParams, null, "width=600,height=400")
+
+                console.log(window.location.search)
+
             })
             .catch(err => {
                 console.log(err)
             })
-    }
-
-    const jumpMastodon = (clientData) => {
-        const popWin = window.open(`${requestUrl}/oauth/authorize?client_id=${clientData.client_id}&scope=read+write+follow+push&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code`,
-            null, "width=600,height=400"
-        )
-        console.log(popWin.window.location)
-        // popWin.window.close()
     }
     /**
      * 获取账户令牌 iTPRWKQIAVMOY-0Hkrk47QLWb5igPbJg5Rv7Vrtxlns
@@ -69,7 +75,7 @@ function LoginPage() {
             client_secret: localStorage.getItem('dudu_client_secret'),
             redirect_uri: 'urn:ietf:wg:oauth:2.0:oob',
             grant_type: 'authorization_code',
-            code: 'HusEmj6H7-lVNWXBlUMAB9ezFihxui19BDccGYqoZPs',
+            code: code,
             scope: 'read write follow push'
         })
             .then(res => {
@@ -77,15 +83,14 @@ function LoginPage() {
                 // 保存用户令牌
                 localStorage.setItem('dudu_access_token', `${res.data.access_token}`)
                 // 返回账户实体
-                handleAccountsEntity()
+                WelcomeAccountEntity()
             })
             .catch(err => {
                 console.log(err)
             })
     }
-
-    // 调用账户实体
-    const handleAccountsEntity = () => {
+    // 返回账户实体
+    const WelcomeAccountEntity = () => {
         axios.get(`${requestUrl}/api/v1/accounts/verify_credentials`,{
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('dudu_access_token')}`
@@ -95,36 +100,41 @@ function LoginPage() {
                 setAccountsEntity(res.data)
             })
             .catch(err => {
-                console.log(`请登录： ${err}`)
+                console.log(err)
             })
     }
 
     console.log(accountsEntity)
-
-    const handleLogout = () => {
-        localStorage.removeItem('dudu_access_token')
-    }
     return (
         <>
             <section style={{color: `white`, fontSize: `2rem`}}>
                 <div className="input-domain">
+                    <div>输入你想登录的实例地址</div>
                     <input
+                        type="input"
                         value={example}
                         onChange={e => setExample(e.target.value)}
                     />
                     <button type="button" onClick={handleExampleCreateClient}>LOGIN</button>
 
-                {/*    获取账户令牌*/}
-                <br />
-                <button type="button" onClick={handleAuthorizationCode}>获取令牌</button>
-                <br/>
-                <button type="button" onClick={handleAccountsEntity}>调用账户实体</button>
-                </div>
+                    <br />
+                    <div>粘贴刚刚获取的 ID </div>
+                    <input
+                        type="input"
+                        value={code}
+                        onChange={e => setCode(e.target.value)}
+                    />
+                    <button type="button" onClick={handleAuthorizationCode}>获取令牌</button>
 
-                <hr/>
-                <div>欢迎您:{accountsEntity.display_name}</div>
-                <br/>
-                <button type="button" onClick={handleLogout}>退出</button>
+                    <br/>
+                    <div>欢迎您:{accountsEntity.display_name}</div>
+                    <div>进入账户中心</div>
+                    <Link to="/accounts">
+                        <button type="button">
+                            个人中心
+                        </button>
+                    </Link>
+                </div>
             </section>
         </>
     )
