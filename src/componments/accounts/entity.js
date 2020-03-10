@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {getAccountsEntity} from "../../api/request";
 import DuduArticle from "../dudu-acticle";
 import "./style.scss"
-
+import axios from "axios"
+import {defaultUrl} from "../../api/config";
 /**
  * 接受路由传过来的参数 props
  * @param props
@@ -21,10 +21,15 @@ function AccountsEntity( props ) {
      * props.match.params.id 是路由穿过来的 id , props 来接收
      */
     const id = props.match.params.id
+
     useEffect(() => {
-        getAccountsEntity(`${id}/statuses`)
+        /***
+         * Get Accounts (id)
+         * @param id
+         */
+        axios.get(`${defaultUrl}/api/v1/accounts/${id}/statuses`)
             .then(res => {
-                setData(res)
+                setData(res.data)
             })
             .catch(err => {
                 console.log(err)

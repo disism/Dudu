@@ -20,6 +20,8 @@ function LoginPage() {
      * 创建应用程序
      */
     const handleExampleCreateClient = () => {
+        // 点击之后保存地址
+        localStorage.setItem('dudu_settings_url', requestUrl)
         axios.post(`${requestUrl}/api/v1/apps`, {
             client_name: 'Test Application',
             redirect_uris: 'urn:ietf:wg:oauth:2.0:oob',
@@ -58,8 +60,6 @@ function LoginPage() {
                     `response_type=code`
                 ].join("&")
                 window.open(authParams, null, "width=600,height=400")
-
-                console.log(window.location.search)
 
             })
             .catch(err => {

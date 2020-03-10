@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import { getPublicTimeline } from "../../api/request";
 import DuduArticle from "../dudu-acticle";
-
+import axios from "axios"
+import {defaultUrl} from "../../api/config";
 /***
  * PublicTimelines Components
  * @returns {*}
@@ -13,8 +13,11 @@ function PublicTimelines() {
 
     const fetchData = async () => {
         try {
-            const res = await getPublicTimeline()
-            setData(res)
+            /***
+             * Get Public Data Timelines
+             */
+            const res = await axios.get(`${defaultUrl}/api/v1/timelines/public`)
+            setData(res.data)
         } catch (err) {
             console.log(err)
         }
@@ -27,10 +30,8 @@ function PublicTimelines() {
         fetchData()
     },[])
 
-    /***
-     * console.log(data)
-     * Public Timeline Data
-     */
+    // console.log(data)
+
     return (
         <>
             {/* 调用 Duduarticle 把 data 数据传给 fetchData */}

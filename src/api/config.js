@@ -1,12 +1,22 @@
 import axios from "axios"
 
-export const baseUrl = 'https://mastodon.social'
+/**
+ * 公开的数据
+ * @type {string}
+ */
+export const defaultUrl = 'https://mastodon.social'
+
+export const baseUrl = localStorage.getItem('dudu_settings_url')
+
 /***
- *  默认的请求
+ * 设置的主站请求
  * @type {AxiosInstance}
  */
 const axiosInstance = axios.create({
-    baseURL: baseUrl
+    baseURL: baseUrl,
+    headers: {
+        'Authorization': `Bearer ${localStorage.getItem('dudu_access_token')}`
+    },
 })
 
 axiosInstance.interceptors.response.use(
