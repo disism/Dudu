@@ -1,7 +1,7 @@
 import React from "react";
-import PublicComponent from "../componments/public";
-import "../assets/scss/public.scss"
-import TrendsComponent from "../componments/trends/trends";
+import PublicComponent from "../../componments/public";
+import "../../assets/scss/public.scss"
+import TrendsComponent from "../../componments/trends/trends";
 
 /***
  * Mastodon Publoc Page Components

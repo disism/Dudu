@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {getTendsData} from "../../api/request";
 import "./style.scss"
-
+import axios from "axios"
+import {defaultUrl} from "../../api/config";
 /***
  * TrendsComponent / 趋势
  * @returns {*}
@@ -11,17 +11,19 @@ function TrendsComponent() {
     const [data, setData] = useState([{history:[]}])
 
     useEffect(() => {
-        getTendsData()
+        /***
+         * Get Tends Data
+         */
+        axios.get(`${defaultUrl}/api/v1/trends`)
             .then(res => {
-                setData(res)
+                setData(res.data)
             })
             .catch(err => {
                 console.log(err)
             })
     },[])
-    /***
-     * console.log(data)
-     */
+
+     // console.log(data)
     return (
         <>
             <section className="trends">
