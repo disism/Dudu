@@ -1,22 +1,10 @@
-import React, {useEffect, useState} from "react";
-import {getHomeFavourites} from "../../api/request";
+import React from "react";
+import HomeFavouritesComponent from "../../componments/home/favourites";
 
 function HomeFavourites() {
-    const [data, setData] = useState({})
-    useEffect(() => {
-        getHomeFavourites()
-            .then(res => {
-                setData(res)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
-
-    console.log(data)
     return (
         <>
-
+            <HomeFavouritesComponent/>
         </>
     )
 }
