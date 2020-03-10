@@ -20,6 +20,7 @@ import AccountsPage from "./pages/accounts";
 import HomeFavourites from "./pages/home/favourites";
 import HomePage from "./pages/home";
 import Index from "./pages";
+import HomeBookmarksComponent from "./componments/home/bookmarks";
 
 
 function App() {
@@ -32,7 +33,10 @@ function App() {
                   <Link to="/login">Login</Link>
                   <Link to="/home/">Home</Link>
                   <Link to="/favourites">Favourites</Link>
+                  <Link to="/bookmarks">Bookmarks</Link>
               </header>
+
+
               <Switch>
                   <Route path="/" exact component={Index} />
                   <Route path="/public" component={PublicPage} />
@@ -41,6 +45,7 @@ function App() {
                   <Route path="/accounts" component={AccountsPage}/>
                   <Route path="/home/" component={HomePage} />
                   <Route path="/favourites" component={HomeFavourites} />
+                  <Route path="/bookmarks" component={HomeBookmarksComponent} />
                   {/* 设置动态 id 并传递给 AccountsEntity 组件 */}
                   <Route path="/account/:id/statuses" component={AccountsEntity} />
               </Switch>
