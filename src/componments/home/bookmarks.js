@@ -1,29 +1,29 @@
 import React, {useEffect, useState} from "react";
-import {getHomeTimelines} from "../../api/request";
-import "./style.scss"
+import {getHomeBookmarks} from "../../api/request";
 import DuduStatusComponent from "./dudu-status";
 
-function HomeTimeLineComponent() {
+function HomeBookmarksComponent() {
     const [data, setData] = useState([{
         account:{},
         media_attachments: []
     }])
-
-
     useEffect(() => {
-        getHomeTimelines()
+        getHomeBookmarks()
             .then(res => {
                 setData(res)
             })
-    },[])
+            .catch(err => {
+                console.log(err)
+            })
+    }, [])
 
     console.log(data)
-
     return (
         <section className="components-main">
-            <div>主页时间线</div>
+            <div>收藏夹</div>
             <DuduStatusComponent featchData={data} />
         </section>
     )
 }
-export default HomeTimeLineComponent
+
+export default HomeBookmarksComponent
