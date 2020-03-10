@@ -19,6 +19,7 @@ import AuthPage from "./pages/auth";
 import AccountsPage from "./pages/accounts";
 import HomeFavourites from "./pages/home/favourites";
 import HomePage from "./pages/home";
+import Index from "./pages";
 
 
 function App() {
@@ -33,7 +34,8 @@ function App() {
                   <Link to="/favourites">Favourites</Link>
               </header>
               <Switch>
-                  <Route path="/public" exact component={PublicPage} />
+                  <Route path="/" exact component={Index} />
+                  <Route path="/public" component={PublicPage} />
                   <Route path="/login" component={LoginPage} />
                   <Route path="/auth" component={AuthPage} />
                   <Route path="/accounts" component={AccountsPage}/>

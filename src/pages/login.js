@@ -59,7 +59,7 @@ function LoginPage() {
                     `redirect_uri=urn:ietf:wg:oauth:2.0:oob`,
                     `response_type=code`
                 ].join("&")
-                window.open(authParams, null, "width=600,height=400")
+                window.open(authParams, null, "width=600,height=550")
 
             })
             .catch(err => {

@@ -1,25 +1,27 @@
-.timeline {
+.components-main {
   margin: 1rem;
-  .timeline-status {
-    border: 1px solid salmon;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    margin: 1rem 0;
-    .timeline-status-image-item {
-      display: flex;
-      overflow: auto;
-      img {
-        border-radius: 0.5rem;
-        height: 20rem;
-      }
-    }
-  }
-  .timeline-status-avatar {
-    $avatar_size: 5rem;
+}
+
+
+.timeline-status {
+  border: 1px solid salmon;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  .timeline-status-image-item {
+    display: flex;
+    overflow: auto;
     img {
       border-radius: 0.5rem;
-      width: $avatar_size;
-      height: $avatar_size;
+      height: 20rem;
     }
+  }
+}
+.timeline-status-avatar {
+  $avatar_size: 5rem;
+  img {
+    border-radius: 0.5rem;
+    width: $avatar_size;
+    height: $avatar_size;
   }
 }
