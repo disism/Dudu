@@ -19,11 +19,13 @@ export const getHomeFavourites = () => axiosInstance.get('/api/v1/favourites')
 export const getHomeBookmarks = () => axiosInstance.get('/api/v1/bookmarks')
 
 /***
- * Post New Statuses
+ * Get Conversations 对话
  * @returns {Promise<AxiosResponse<T>>}
  */
-export const postNewStatuses = (status) => axiosInstance.post('/api/v1/statuses', {
-    status: status,
-    media_ids: null,
-    poll: null,
-})
+export const getConversations = () => axiosInstance.get('/api/v1/conversations')
+
+/***
+ * 通知
+ * @returns {Promise<AxiosResponse<T>>}
+ */
+export const getNotifications = () => axiosInstance.get('/api/v1/notifications')
