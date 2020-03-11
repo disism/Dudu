@@ -24,5 +24,6 @@ export const getHomeBookmarks = () => axiosInstance.get('/api/v1/bookmarks')
  */
 export const postNewStatuses = (status) => axiosInstance.post('/api/v1/statuses', {
     status: status,
-    media_ids: null
+    media_ids: null,
+    poll: null,
 })

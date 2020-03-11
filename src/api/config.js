@@ -15,9 +15,8 @@ export const baseUrl = localStorage.getItem('dudu_settings_url')
 const axiosInstance = axios.create({
     baseURL: baseUrl,
     headers: {
-        'Content-Type':'application/x-www-form-urlencoded',
         'Authorization': `Bearer ${localStorage.getItem('dudu_access_token')}`
-    },
+    }
 })
 
 axiosInstance.interceptors.response.use(
