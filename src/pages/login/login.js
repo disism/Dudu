@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./login.scss"
 import axios from "axios"
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 /***
  * Login Page, Input domain -> login OAuth2
@@ -13,8 +13,7 @@ function LoginPage() {
     const requestUrl = `https://${example}`
     // 授权码状态
     const [code, setCode] = useState('')
-    // 账户实体数据
-    const [accountsEntity, setAccountsEntity] = useState({})
+
     const history = useHistory()
     /***
      * 创建应用程序
@@ -63,7 +62,7 @@ function LoginPage() {
 
             })
             .catch(err => {
-                console.log(err)
+                console.log(`xx:${err}`)
             })
     }
     /**
@@ -86,7 +85,7 @@ function LoginPage() {
                 WelcomeAccountEntity()
             })
             .catch(err => {
-                console.log(err)
+                console.log(`获取令牌失败:${err}`)
             })
     }
     // 返回账户实体
@@ -97,22 +96,13 @@ function LoginPage() {
             }
         })
             .then(res => {
-                setAccountsEntity(res.data)
-                RedirectUrl()
+                return window.location.href = "/home"
             })
             .catch(err => {
                 console.log(err)
             })
     }
 
-    // 跳转
-    const RedirectUrl = () => {
-        return setTimeout(() => {
-            history.push("/home")
-        }, 1000)
-    }
-
-    console.log(accountsEntity)
     return (
         <section className="login">
             <button className="goback-button" onClick={() => history.goBack()}>返回</button>
@@ -134,8 +124,6 @@ function LoginPage() {
                 />
                 <button type="button" onClick={handleAuthorizationCode}>获取令牌</button>
 
-                <br/>
-                <div>欢迎您:{accountsEntity.display_name}</div>
             </div>
         </section>
 

@@ -1,16 +1,22 @@
 import React, {useEffect, useState} from "react";
 import {getHomeFavourites} from "../../api/request";
-import DuduStatusComponent from "./dudu-status";
+import DuduStatusComponent from "../home/dudu-status";
+import "./style.scss"
+import { useHistory } from "react-router-dom"
 
 function HomeFavouritesComponent() {
+    const history = useHistory()
     const [data, setData] = useState([{
         account:{},
         media_attachments: []
     }])
+    const [isLoading, setIsLoading] = useState(true)
+
     useEffect(() => {
         getHomeFavourites()
             .then(res => {
                 setData(res)
+                setIsLoading(false)
             })
             .catch(err => {
                 console.log(err)
@@ -19,9 +25,10 @@ function HomeFavouritesComponent() {
 
     console.log(data)
     return (
-        <section className="components-main">
+        <section className="favourites">
+            <button className="goback-button" onClick={() => history.goBack()}>返回</button>
             <div>喜欢</div>
-            <DuduStatusComponent featchData={data} />
+            {isLoading ? <div className="loading">Loading...</div> : <DuduStatusComponent featchData={data} />}
         </section>
     )
 }

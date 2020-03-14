@@ -1,24 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {getConversations} from "../../api/request";
 import "./style.scss"
+import {useHistory} from "react-router-dom"
 
-function ConversationsComponent() {
-    const [data, setData] = useState([{
-        last_status: {}
-    }])
+const Conversations = ({featchData}) => {
 
-    useEffect(() => {
-        getConversations()
-            .then(res => {
-                setData(res)
-            })
-    },[])
-
-    // console.log(data)
     return (
-        <section className="conversations">
-            <div>私信</div>
-            {data && data.map((items, idx) => {
+        <>
+            {featchData && featchData.map((items, idx) => {
                 return (
                     <div key={idx}>
                         <div className="conversations-status">
@@ -38,6 +27,30 @@ function ConversationsComponent() {
                     </div>
                 )
             })}
+        </>
+    )
+}
+function ConversationsComponent() {
+    const history = useHistory()
+    const [isLoading, setIsLoading] = useState(true)
+    const [data, setData] = useState([{
+        last_status: {}
+    }])
+
+    useEffect(() => {
+        getConversations()
+            .then(res => {
+                setData(res)
+                setIsLoading(false)
+            })
+    },[])
+
+    // console.log(data)
+    return (
+        <section className="conversations">
+            <button className="goback-button" onClick={() => history.goBack()}>返回</button>
+            <div>私信</div>
+            {isLoading ? <div className="loading">Loading...</div> : <Conversations featchData={data} />}
         </section>
     )
 }

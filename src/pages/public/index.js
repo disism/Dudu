@@ -1,23 +1,23 @@
 import React from "react";
-import PublicComponent from "../../componments/public";
-import "./public.scss"
-import TrendsComponent from "../../componments/trends/trends";
+import "./style.scss"
 import {useHistory} from "react-router-dom"
+import PublicTimelines from "../../componments/public";
 
-function PublicPage() {
+const PublicContent = () => {
     const history = useHistory()
     return (
-        <section className="public-layout">
-            <section>
-                <div className="goback">
-                    <button className="goback-button" onClick={() => history.goBack()}>返回</button>
-                </div>
-                <PublicComponent/>
-            </section>
-            <section>
-                <TrendsComponent/>
-            </section>
+        <section className="public">
+            <button className="goback-button" onClick={() => history.goBack()}>返回</button>
+            <PublicTimelines />
         </section>
+    )
+}
+function PublicPage() {
+
+    return (
+        <>
+            <PublicContent />
+        </>
     )
 }
 

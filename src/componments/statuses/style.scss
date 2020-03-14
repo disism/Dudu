@@ -1,3 +1,23 @@
 .new-statuses {
   margin: 1rem;
+
+  textarea {
+    outline: none;
+    border: 2px dashed #2b90d9;
+    border-radius: 0.4rem;
+    width: 50vw;
+    height: 10vw;
+  }
+
+  button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    padding: 1rem;
+    border-radius: 0.4rem;
+
+    &:hover {
+      background-color: antiquewhite;
+    }
+  }
 }

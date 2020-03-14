@@ -1,12 +1,11 @@
 .header {
-  padding: 2rem;
+  display: flex;
+  flex-direction: row;
   border-bottom: 1px solid antiquewhite;
+  padding: 1rem;
   a {
-    color: #191b22;
-    background-color: whitesmoke;
+    padding: 0.5rem;
     border-radius: 0.5rem;
-    padding: 0.5rem 2rem;
-    margin-right: 1rem;
     text-decoration: none;
   }
 }

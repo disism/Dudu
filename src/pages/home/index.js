@@ -1,7 +1,6 @@
 import React from "react";
-import HomeTimeline from "./timelines";
-import NewStatusesComponent from "../../componments/statuses";
 import HeaderComponent from "../../componments/header";
+import NewStatusesComponent from "../../componments/statuses";
 
 function HomePage() {
 
@@ -9,7 +8,6 @@ function HomePage() {
         <>
             <HeaderComponent/>
             <NewStatusesComponent/>
-            <HomeTimeline/>
         </>
     )
 }
