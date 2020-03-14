@@ -1,0 +1,32 @@
+
+.login {
+  margin: 1rem;
+  font-size: 2rem;
+
+  .input-domain {
+    margin: 1rem auto;
+    text-align: center;
+
+    input {
+      border: none;
+      outline: none;
+      width: 20rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      background-color: #282c37;
+      color: #d9e1e8;
+    }
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      border-radius: 0.5rem;
+      margin-left: 0.5rem;
+      width: 5rem;
+      height: 3rem;
+      background-color: #2b90d9;
+      color: #d9e1e8;
+    }
+  }
+
+}
