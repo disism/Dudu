@@ -1,18 +1,17 @@
 import React from "react";
 import PublicComponent from "../../componments/public";
-import "../../assets/scss/public.scss"
+import "./public.scss"
 import TrendsComponent from "../../componments/trends/trends";
+import {useHistory} from "react-router-dom"
 
-/***
- * Mastodon Publoc Page Components
- * @returns {*}
- * @constructor
- */
 function PublicPage() {
-
+    const history = useHistory()
     return (
         <section className="public-layout">
             <section>
+                <div className="goback">
+                    <button className="goback-button" onClick={() => history.goBack()}>返回</button>
+                </div>
                 <PublicComponent/>
             </section>
             <section>

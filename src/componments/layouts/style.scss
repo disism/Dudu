@@ -1,0 +1,80 @@
+@import "../../assets/scss/var.scss";
+
+.header {
+  padding: 2rem;
+  border-bottom: 1px solid antiquewhite;
+  a {
+    color: #191b22;
+    background-color: whitesmoke;
+    border-radius: 0.5rem;
+    padding: 0.5rem 2rem;
+    margin-right: 1rem;
+    text-decoration: none;
+  }
+}
+
+@mixin WelcomeButton {
+  button {
+    border-radius: 0.4rem;
+    width: 20vw;
+    height: 4rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    &:hover {
+      background-color: antiquewhite;
+    }
+
+    @media (max-width: $mobile) {
+      width: 90vw;
+    }
+  }
+}
+.layout {
+  margin: 3rem;
+
+  .welcome {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    .welcome-inner {
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+
+      .welcome-inner-title {
+        margin: 1rem 0;
+      }
+
+      .welcome-login-registered{
+        margin: 1rem 0;
+        @include WelcomeButton;
+      }
+
+      .welcome-explore {
+        margin: 1rem 0;
+        @include WelcomeButton;
+      }
+    }
+
+    .welcome-image {
+      text-align: center;
+      img {
+        width: 25rem;
+      }
+      @media (max-width: $mobile) {
+        img {
+          width: 50%;
+        }
+      }
+    }
+
+    @media (max-width: $mobile) {
+      flex-direction: column;
+    }
+  }
+
+
+}

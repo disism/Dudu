@@ -1,61 +1,82 @@
 import React from 'react';
 import {
     BrowserRouter as Router,
-    Link,
-    Route,
-    Switch
+    Route
 } from "react-router-dom";
 
-/***
- * Config Router
- */
 import PublicPage from "./pages/public";
-import LoginPage from "./pages/login";
+import LoginPage from "./pages/login/login";
 import AccountsEntity from "./componments/accounts/entity";
-import AuthPage from "./pages/auth";
 import AccountsPage from "./pages/accounts";
 import HomeFavourites from "./pages/home/favourites";
 import HomePage from "./pages/home";
-import Index from "./pages";
 import HomeBookmarksComponent from "./componments/home/bookmarks";
 import HomeConversations from "./pages/home/conversations";
 import HomeNotifications from "./pages/home/notifications";
+import Layouts from "./componments/layouts";
+
+const routes = [
+    {
+        path: "/",
+        exact: true,
+        component: Layouts
+    },
+    {
+        path: "/public",
+        component: PublicPage
+    },
+    {
+        path: "/login",
+        component: LoginPage
+    },
+    {
+        path: "/accounts",
+        component: AccountsPage
+    },
+    {
+        path: "/home",
+        component: HomePage,
+    },
+    {
+        path: "/favourites",
+        component: HomeFavourites
+    },
+    {
+        path: "/bookmarks",
+        component: HomeBookmarksComponent
+    },
+    {
+        path: "/conversations",
+        component: HomeConversations
+    },
+    {
+        path: "/notifications",
+        component: HomeNotifications
+    },
+    {
+        path: "/account/:id/statuses",
+        component: AccountsEntity
+    }
+]
 
 
 function Routers() {
     return (
-        <>
-            <Router>
+        <Router>
 
-                <header className="header">
-                    <Link to="/public">Public</Link>
-                    <Link to="/login">Login</Link>
-                    <Link to="/home/">Home</Link>
-                    <Link to="/favourites">Favourites</Link>
-                    <Link to="/bookmarks">Bookmarks</Link>
-                    <Link to="/conversations">Conversations</Link>
-                    <Link to="/notifications">Notifications</Link>
-                </header>
+            {routes.map((route, idx) => {
+                const { path, exact, routes } = route;
+                return (
+                    <Route key={idx} path={path}
+                        exact={exact}
+                        render={(routeProps) => (
+                            <route.component routes={routes} {...routeProps} />
+                        )}
+                    />
+                );
+            })}
 
-
-                <Switch>
-                    <Route path="/" exact component={Index} />
-                    <Route path="/public" component={PublicPage} />
-                    <Route path="/login" component={LoginPage} />
-                    <Route path="/auth" component={AuthPage} />
-                    <Route path="/accounts" component={AccountsPage}/>
-                    <Route path="/home/" component={HomePage} />
-                    <Route path="/favourites" component={HomeFavourites} />
-                    <Route path="/bookmarks" component={HomeBookmarksComponent} />
-                    <Route path="/conversations" component={HomeConversations} />
-                    <Route path="/notifications" component={HomeNotifications} />
-                    {/* 设置动态 id 并传递给 AccountsEntity 组件 */}
-                    <Route path="/account/:id/statuses" component={AccountsEntity} />
-                </Switch>
-                {/* 路由重定向 */}
-                {/*<Redirect from="/" to="/public" />*/}
-            </Router>
-        </>
+        </Router>
     );
 }
 
