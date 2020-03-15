@@ -29,3 +29,9 @@ export const getConversations = () => axiosInstance.get('/api/v1/conversations')
  * @returns {Promise<AxiosResponse<T>>}
  */
 export const getNotifications = () => axiosInstance.get('/api/v1/notifications')
+
+/***
+ * 个人账户中心
+ * @returns {Promise<AxiosResponse<T>>}
+ */
+export const getAccounts = () => axiosInstance.get('/api/v1/accounts/verify_credentials')
