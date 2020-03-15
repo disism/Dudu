@@ -7,7 +7,6 @@ const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
 
 function LoginPage() {
     const [example, setExample] = useState('mastodon.social')
-
     const requestUrl = `https://${example}`
 
     const handleAuthorizeTheUser = () => {
@@ -21,8 +20,6 @@ function LoginPage() {
         ].join("&")
         window.location.href=authParameters
     }
-
-
 
     return (
         <>

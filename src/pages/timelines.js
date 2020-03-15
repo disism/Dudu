@@ -1,5 +1,5 @@
 import React from "react";
-import HomeTimeLineComponent from "../../componments/home/timeline";
+import HomeTimeLineComponent from "../componments/home/timeline";
 
 function HomeTimeline() {
     return (

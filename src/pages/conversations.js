@@ -1,5 +1,5 @@
 import React from "react";
-import ConversationsComponent from "../../componments/conversations";
+import ConversationsComponent from "../componments/conversations";
 
 function HomeConversations() {
     return (

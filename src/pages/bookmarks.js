@@ -1,5 +1,5 @@
 import React from "react";
-import HomeBookmarksComponent from "../../componments/bookmarks";
+import HomeBookmarksComponent from "../componments/bookmarks";
 
 
 function HomeBookmarks() {

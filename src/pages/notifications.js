@@ -1,5 +1,5 @@
 import React from "react";
-import NotificationsComponents from "../../componments/notifications";
+import NotificationsComponents from "../componments/notifications";
 
 function HomeNotifications() {
     return (

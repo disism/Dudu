@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.scss"
 import {useHistory} from "react-router-dom"
-import PublicTimelines from "../../componments/public";
+import PublicTimelines from "./timelines";
 
 const PublicContent = () => {
     const history = useHistory()
