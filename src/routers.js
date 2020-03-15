@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Route
 } from "react-router-dom";
 
@@ -12,8 +12,8 @@ import HomePage from "./pages/home";
 import HomeConversations from "./pages/home/conversations";
 import HomeNotifications from "./pages/home/notifications";
 import HomeBookmarks from "./pages/home/bookmarks";
-import Verification from "./componments/verification";
 import LoginPage from "./pages/login/login";
+import Welcome from "./componments/welcome";
 
 
 
@@ -21,7 +21,7 @@ const routes = [
     {
         path: "/",
         exact: true,
-        component: Verification
+        component: Welcome
     },
     {
         path: "/public",
