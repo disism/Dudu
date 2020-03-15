@@ -3,6 +3,8 @@ import DuduArticle from "../dudu-acticle";
 import "./style.scss"
 import axios from "axios"
 import {defaultUrl} from "../../api/config";
+import {useHistory} from "react-router-dom";
+
 /**
  * 接受路由传过来的参数 props
  * @param props
@@ -10,6 +12,7 @@ import {defaultUrl} from "../../api/config";
  * @constructor
  */
 function AccountsEntity( props ) {
+    const history = useHistory()
     const [data, setData] = useState(
         [
             {
@@ -40,30 +43,30 @@ function AccountsEntity( props ) {
     const account = data[0].account
 
     return (
-        <section style={{color: `white`}}>
-            <div className="entity-header-image">
+        <section className="accounts-entity">
+            <button className="goback-button" onClick={() => history.goBack()}>返回</button>
+            <div className="accounts-entity-header-image">
                 <img src={account.header} alt="" />
             </div>
 
-            <section className="account-content">
+            <section className="accounts-entity-content">
                 <div className="entity-avatar">
                     <img src={account.avatar} alt=""/>
                 </div>
-                <div>名字：{account.display_name}</div>
-                <div>域：{account.acct}</div>
-                <div className="account-noto">
+                <div className="accounts-entity-introduction">
+                    <div>名字：{account.display_name}</div>
                     个人简介：
                     <div dangerouslySetInnerHTML={{__html:account.note}}></div>
-                </div>
-                <div>加入于： {account.created_at}</div>
-                <div>
+                    <div>加入于： {account.created_at}</div>
+                    <div>
+
+                    </div>
+                    <div>关注者：{account.followers_count}</div>
+                    <div>正在关注： {account.following_count}</div>
+                    <div>嘟文： {account.statuses_count}</div>
+                    <div>最后更新时间： {account.last_status_at}</div>
 
                 </div>
-                <div>关注者：{account.followers_count}</div>
-                <div>正在关注： {account.following_count}</div>
-                <div>嘟文： {account.statuses_count}</div>
-                <div>最后更新时间： {account.last_status_at}</div>
-
 
             </section>
 

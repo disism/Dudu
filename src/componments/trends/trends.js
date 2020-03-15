@@ -27,7 +27,7 @@ function TrendsComponent() {
     return (
         <>
             <section className="trends">
-                <h1 style={{color: `white`}}>趋势</h1>
+                <h1 style={{textAlign: `center`, marginTop: `1rem`}}>趋势</h1>
                 {data.map((items, idx) => {
                     return (
                         <div key={idx}>

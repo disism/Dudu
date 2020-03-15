@@ -5,21 +5,23 @@ import {
 } from "react-router-dom";
 
 import PublicPage from "./pages/public";
-import LoginPage from "./pages/login/login";
 import AccountsEntity from "./componments/accounts/entity";
 import AccountsPage from "./pages/accounts";
 import HomeFavourites from "./pages/home/favourites";
 import HomePage from "./pages/home";
-import HomeBookmarksComponent from "./componments/home/bookmarks";
 import HomeConversations from "./pages/home/conversations";
 import HomeNotifications from "./pages/home/notifications";
-import Layouts from "./componments/layouts";
+import HomeBookmarks from "./pages/home/bookmarks";
+import Verification from "./componments/verification";
+import LoginPage from "./pages/login/login";
+
+
 
 const routes = [
     {
         path: "/",
         exact: true,
-        component: Layouts
+        component: Verification
     },
     {
         path: "/public",
@@ -43,7 +45,7 @@ const routes = [
     },
     {
         path: "/bookmarks",
-        component: HomeBookmarksComponent
+        component: HomeBookmarks
     },
     {
         path: "/conversations",

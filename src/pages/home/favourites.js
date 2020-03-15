@@ -1,13 +1,10 @@
 import React from "react";
-import HomeFavouritesComponent from "../../componments/home/favourites";
-import { useHistory } from "react-router-dom"
+import HomeFavouritesComponent from "../../componments/favourites";
 
 function HomeFavourites() {
 
-    const history = useHistory()
     return (
         <>
-            <button className="goback-button" onClick={() => history.goBack()}>返回</button>
             <HomeFavouritesComponent/>
 
         </>

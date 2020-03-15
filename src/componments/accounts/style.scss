@@ -1,24 +1,32 @@
-.entity-header-image {
-  margin: 1rem;
-  img {
-    border-radius: 0.5rem;
-    width: 100%;
-  }
-}
+@import "../../assets/scss/var.scss";
 
-.account-content {
+.accounts-entity {
   margin: 1rem;
-  .entity-avatar {
+  .accounts-entity-header-image {
+    margin: 1rem 0;
     img {
-      width: 5rem;
-      height: 5rem;
       border-radius: 0.5rem;
+      width: 40%;
+      @media (max-width: $mobile) {
+        width: 100%;
+      }
     }
   }
-  .account-noto {
-    margin: 1rem 0;
-    padding: 1rem;
-    border: 1px solid salmon;
-    border-radius: 0.5rem;
+
+  .accounts-entity-content {
+    color: #191b22;
+    .entity-avatar {
+      img {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 0.5rem;
+      }
+    }
+    .accounts-entity-introduction {
+      margin: 1rem 0;
+      padding: 1rem;
+      border: 1px solid salmon;
+      border-radius: 0.5rem;
+    }
   }
 }

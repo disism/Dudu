@@ -1,11 +1,12 @@
 import React, { useState} from "react";
 import "./style.scss"
 import axios from "axios"
+import HomeTimeLineComponent from "../home/timeline";
 
 function NewStatusesComponent() {
     const [statusValue, setStatusValue] = useState('')
-
-    console.log(statusValue)
+    const [statusSend, setStatesSend] = useState('')
+    const [refresh, setRefresh] = useState(false)
 
     /**
      * 调用发布业务组件并传给输入的 Value
@@ -16,8 +17,6 @@ function NewStatusesComponent() {
         setStatusValue('')
     }
 
-
-
     /***
      * 发布业务组件
      * @param status
@@ -25,7 +24,7 @@ function NewStatusesComponent() {
      */
     const NewStatuses = (status) => {
         if (status === '') {
-            return console.log('请输入嘟文')
+            return setStatesSend('请输入嘟文')
         }
         axios.post( `${localStorage.getItem('dudu_settings_url')}/api/v1/statuses`,{
             status: status,
@@ -36,22 +35,32 @@ function NewStatusesComponent() {
                 'Authorization': `Bearer ${localStorage.getItem('dudu_access_token')}`
             }
         })
-            .then(res => {
-                console.log(res)
+            .then(() => {
+                setRefresh(true)
+                setStatesSend('发送成功')
             })
-            .catch((err => {
-                console.log(err)
+            .catch((() => {
+                setStatesSend('发送失败')
             }))
+    }
+
+    const SetTimeoutState = () => {
+        return <div>{statusSend}</div>
+
     }
 
     return (
         <section className="new-statuses">
-            新嘟文
-            <textarea
-                value={statusValue}
-                onChange={e => setStatusValue(e.target.value)}
-            />
+            <div>新嘟文</div>
+            <div>
+                <textarea
+                    value={statusValue}
+                    onChange={e => setStatusValue(e.target.value)}
+                />
+            </div>
             <button type="button" onClick={SendStatus}>发布嘟文</button>
+            <SetTimeoutState />
+            <HomeTimeLineComponent status={refresh} />
         </section>
     )
 }

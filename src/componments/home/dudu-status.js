@@ -2,7 +2,6 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 /***
- * 作为状态的组件
  * @param featchData
  * @returns {*}
  * @constructor

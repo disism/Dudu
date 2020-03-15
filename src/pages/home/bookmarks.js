@@ -1,11 +1,12 @@
 import React from "react";
-import {useHistory} from "react-router-dom";
+import HomeBookmarksComponent from "../../componments/bookmarks";
+
 
 function HomeBookmarks() {
-    const history = useHistory()
+
     return (
         <>
-            <button className="goback-button" onClick={() => history.goBack()}>返回</button>
+            <HomeBookmarksComponent/>
         </>
     )
 }

@@ -1,23 +1,10 @@
-import React, {useEffect} from "react";
+import React from "react";
+import {Link} from "react-router-dom";
+import homeWelcomeImage from "../../assets/images/Elephants/Elephant Friend (Greeting).png";
 import "./style.scss"
-import {Link, useHistory} from "react-router-dom";
-import homeWelcomeImage from "../../assets/images/Elephants/Elephant Friend (Greeting).png"
-
-function Layouts() {
-
-    const history = useHistory()
-    useEffect(() => {
-        const loginToken = localStorage.getItem('dudu_access_token')
-        if (loginToken) {
-            return goHome()
-        }
-    },[])
-
-    const goHome = () => {
-        history.push("/home")
-    }
 
 
+function Welcome() {
     return (
         <section className="layout">
             <div style={{
@@ -25,14 +12,10 @@ function Layouts() {
                 textAlign: `center`,
                 margin: `3rem 0`
             }}>欢迎来到 DUDU !</div>
-
             <section className="welcome">
-
                 <section className="welcome-image">
                     <img src={homeWelcomeImage} alt="" />
                 </section>
-
-
                 <section className="welcome-inner">
                     <div className="welcome-explore">
                         <div className="welcome-inner-title">看一看现在发生了什么</div>
@@ -57,4 +40,4 @@ function Layouts() {
     )
 }
 
-export default Layouts
+export default Welcome
