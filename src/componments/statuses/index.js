@@ -1,7 +1,8 @@
 import React, { useState} from "react";
 import "./style.scss"
 import axios from "axios"
-import HomeTimeLineComponent from "../home/timeline";
+import HomeTimeLineComponent from "../timeline";
+import PersonalAccount from "../accounts/personal";
 
 function NewStatusesComponent() {
     const [statusValue, setStatusValue] = useState('')
@@ -51,6 +52,7 @@ function NewStatusesComponent() {
 
     return (
         <section className="new-statuses">
+            <PersonalAccount/>
             <div>新嘟文</div>
             <div>
                 <textarea

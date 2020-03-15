@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {getHomeTimelines} from "../../api/request";
 import "./style.scss"
-import DuduStatusComponent from "./dudu-status";
+import DuduStatusComponent from "../status";
 
 function HomeTimeLineComponent({status}) {
     const [data, setData] = useState([{

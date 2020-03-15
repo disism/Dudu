@@ -3,6 +3,11 @@ import "./style.scss"
 import {Link} from "react-router-dom";
 
 function HeaderComponent() {
+    const handleLogout = () => {
+        localStorage.removeItem('dudu_access_token')
+        window.location.href="/"
+    }
+
     return (
         <header className="header">
             <Link to="/home">首页</Link>
@@ -11,6 +16,7 @@ function HeaderComponent() {
             <Link to="/conversations">私信</Link>
             <Link to="/notifications">通知</Link>
             <Link to="/public">公开时间轴</Link>
+            <button type="button" onClick={handleLogout}>退出</button>
         </header>
     )
 }

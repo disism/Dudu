@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {getHomeFavourites} from "../../api/request";
-import DuduStatusComponent from "../home/dudu-status";
+import DuduStatusComponent from "../status";
 import "./style.scss"
 import { useHistory } from "react-router-dom"
 

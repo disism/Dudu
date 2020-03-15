@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import "./style.scss"
 
 /***
  * @param featchData
@@ -13,15 +14,17 @@ function DuduStatusComponent({featchData}) {
                 return (
                     <div key={idx}>
                         <section className="timeline-status">
-                            <div>{items.created_at}</div>
                             <div className="timeline-status-avatar">
                                 <img src={items.account.avatar} alt="" />
                             </div>
-                            <Link to={`/account/${items.account.id}/statuses`}>
-                                {items.account.display_name}@{items.account.acct}
-                            </Link>
 
-                            <div dangerouslySetInnerHTML={{__html: items.content}}/>
+                            <div className="account-id">
+                                <Link to={`/account/${items.account.id}/statuses`}>
+                                    {items.account.display_name}@{items.account.acct}
+                                </Link>
+                            </div>
+
+                            <div className="status-content" dangerouslySetInnerHTML={{__html: items.content}}/>
                             <section className="timeline-status-image-item">
                                 {items.media_attachments && items.media_attachments.map((item, idxx) => {
                                     return (
@@ -31,7 +34,7 @@ function DuduStatusComponent({featchData}) {
                                     )
                                 })}
                             </section>
-                            {!items.reblog ? null : <div>转推了</div>}
+                            {!items.reblog ? null : <span className="reblog">转推了</span>}
                             <section className="timeline-status-image-item">
                                 {items.reblog && items.reblog.media_attachments.map((items, idx) => {
                                     return (
@@ -41,6 +44,7 @@ function DuduStatusComponent({featchData}) {
                                     )
                                 })}
                             </section>
+                            <div className="created_at">{items.created_at}</div>
                             <div>
                                 Like: {items.favourites_count} ·
                                 回复： {items.replies_count} ·

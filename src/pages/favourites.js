@@ -1,5 +1,5 @@
 import React from "react";
-import HomeFavouritesComponent from "../../componments/favourites";
+import HomeFavouritesComponent from "../componments/favourites";
 
 function HomeFavourites() {
 
