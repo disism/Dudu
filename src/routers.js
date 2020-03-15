@@ -5,7 +5,6 @@ import {
 } from "react-router-dom";
 
 import PublicPage from "./pages/public";
-import LoginPage from "./pages/login/login";
 import AccountsEntity from "./componments/accounts/entity";
 import AccountsPage from "./pages/accounts";
 import HomeFavourites from "./pages/home/favourites";
@@ -14,6 +13,7 @@ import HomeConversations from "./pages/home/conversations";
 import HomeNotifications from "./pages/home/notifications";
 import HomeBookmarks from "./pages/home/bookmarks";
 import Verification from "./componments/verification";
+import LoginPage from "./pages/login/login";
 
 
 
