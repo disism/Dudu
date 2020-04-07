@@ -1,28 +1,56 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useReducer } from "react";
 import DuduArticle from "../dudu-acticle";
 import axios from "axios"
 import {defaultUrl} from "../../api/config";
+import Loading from "../loading";
+
+const initialState = {
+    data: [],
+    error: '',
+    isLoading: true
+}
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'FETCH_SUCCESS':
+            return {
+                data: action.payload,
+                error: '',
+                isLoading: false
+            }
+        case 'FETCH_ERROR':
+            return {
+                data: [],
+                error: '出现了一些错误，或许您应该使用代理访问！',
+                isLoading: false
+            }
+        case 'LOADING_TRUE':
+            return {
+                data: [],
+                error: '',
+                isLoading: true
+            }
+        default:
+            return state
+    }
+}
 
 function PublicTimelines() {
-    const [data, setData] = useState([])
-    const [isloading, setIsLoading] = useState(true)
-
+    const [state, dispatch] = useReducer(reducer, initialState)
     useEffect(() => {
+        dispatch({ type: 'LOADING_TRUE' })
         axios.get(`${defaultUrl}/api/v1/timelines/public`)
             .then(res => {
-                setData(res.data)
-                setIsLoading(false)
+                dispatch({ type: 'FETCH_SUCCESS', payload: res.data })
             })
             .catch(err => {
-                console.log(err)
+                dispatch({ type: 'FETCH_ERROR' })
             })
     },[])
 
-    // console.log(data)
-
     return (
         <>
-            {isloading ? <div className="loading">Loading ...</div> : <DuduArticle fetchData={data}/>}
+            {state.isLoading ? <Loading/> : <DuduArticle fetchData={state.data}/>}
+            {state.error}
         </>
     )
 }
