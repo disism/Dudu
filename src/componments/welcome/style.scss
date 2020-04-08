@@ -19,6 +19,14 @@
     }
   }
 }
+
+.welcome-diaplay-name {
+  display: flex;
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
 .layout {
   margin: 3rem;
 
@@ -63,6 +71,5 @@
       flex-direction: column;
     }
   }
-
 
 }

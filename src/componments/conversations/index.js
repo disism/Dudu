@@ -1,37 +1,37 @@
 import React, {useEffect, useState} from "react";
 import {getConversations} from "../../api/request";
 import "./style.scss"
-import {useHistory} from "react-router-dom"
+import GoBack from "../back";
+import Loading from "../loading";
 
 const Conversations = ({featchData}) => {
-
     return (
         <>
-            {featchData && featchData.map((items, idx) => {
-                return (
-                    <div key={idx}>
-                        <div className="conversations-status">
-                            {console.log(items.last_status)}
-                            <p>{items.last_status.created_at}</p>
-                            <div dangerouslySetInnerHTML={{__html: items.last_status.content }} />
+        {featchData && featchData.map((items, idx) => {
+            return (
+                <div key={idx}>
+                    <div className="conversations-status">
+                        {console.log(items.last_status)}
+                        <p>{items.last_status.created_at}</p>
+                        <div dangerouslySetInnerHTML={{__html: items.last_status.content }} />
 
-                        </div>
-
-                        {items.accounts && items.accounts.map((iitems, iidx) => {
-                            return (
-                                <div key={iidx}>
-                                    {iitems.acct}
-                                </div>
-                            )
-                        })}
                     </div>
-                )
-            })}
+
+                    {items.accounts && items.accounts.map((iitems, iidx) => {
+                        return (
+                            <div key={iidx}>
+                                {iitems.acct}
+                            </div>
+                        )
+                    })}
+                </div>
+            )
+        })}
         </>
     )
 }
+
 function ConversationsComponent() {
-    const history = useHistory()
     const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState([{
         last_status: {}
@@ -45,12 +45,11 @@ function ConversationsComponent() {
             })
     },[])
 
-    // console.log(data)
     return (
         <section className="conversations">
-            <button className="goback-button" onClick={() => history.goBack()}>返回</button>
+            <GoBack/>
             <div>私信</div>
-            {isLoading ? <div className="loading">Loading...</div> : <Conversations featchData={data} />}
+            {isLoading ? <Loading/>: <Conversations featchData={data} />}
         </section>
     )
 }

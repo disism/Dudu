@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
     HashRouter as Router,
     Route
@@ -13,8 +14,6 @@ import HomeBookmarks from "./pages/bookmarks";
 import LoginPage from "./pages/login";
 import Verification from "./componments/verification";
 import Home from "./pages/home";
-
-
 
 const routes = [
     {
@@ -74,7 +73,7 @@ function Routers() {
             })}
 
         </Router>
-    );
+    )
 }
 
 export default Routers
