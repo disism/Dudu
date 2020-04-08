@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import "./style.scss"
 import {getNotifications} from "../../api/request";
-import {useHistory} from "react-router-dom";
+import GoBack from "../back";
+import Loading from "../loading";
 
 function NotificationsComponents() {
-    const history = useHistory()
     const [data, setData] = useState([{
         status: {},
         type: ""
@@ -22,9 +22,9 @@ function NotificationsComponents() {
     console.log(data)
     return (
         <section className="notifications">
-            <button className="goback-button" onClick={() => history.goBack()}>返回</button>
+            <GoBack/>
             <div>通知</div>
-            {isLoading ? <div className="loading">Loading...</div> : <div>{data && data.map((items, idx) => {
+            {isLoading ? <Loading/> : <div>{data && data.map((items, idx) => {
                 return (
                     <div
                         className="notifications-status"

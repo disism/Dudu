@@ -1,17 +1,16 @@
-import React, { useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "./style.scss"
-import {useHistory} from "react-router-dom";
+import GoBack from "../back";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
 const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
 
 function LoginComponent() {
-    const history = useHistory()
-
     const [example, setExample] = useState('mastodon.social')
     const requestUrl = `https://${example}`
 
     const handleAuthorizeTheUser = () => {
+
         console.log(requestUrl)
         localStorage.setItem('dudu_settings_url', requestUrl)
         const authParameters = [
@@ -22,15 +21,20 @@ function LoginComponent() {
         ].join("&")
         window.location.href=authParameters
     }
+    const loginFocus = useRef(null)
+    useEffect(() => {
+        loginFocus.current.focus()
+    },[])
 
     return (
         <>
             <div>
                 <section className="login">
-                    <button className="goback-button" onClick={() => history.goBack()}>返回</button>
+                    <GoBack/>
                     <div className="input-domain">
                         <div style={{margin: `1rem 0`}}>输入你要登录的实例地址</div>
                         <input
+                            ref={loginFocus}
                             type="input"
                             value={example}
                             onChange={e => setExample(e.target.value)}

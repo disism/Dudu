@@ -2,9 +2,9 @@ import React, {useEffect, useReducer } from "react";
 import "./style.scss"
 import axios from "axios"
 import {defaultUrl} from "../../api/config";
-import {useHistory} from "react-router-dom";
 import AccountsComponent from "./accounts";
 import Loading from "../loading";
+import GoBack from "../back";
 
 const initialState = {
     data: [],
@@ -36,45 +36,43 @@ const reducer = (state, action) => {
             return state
     }
 }
-/**
- * 接受路由传过来的参数 props
- * @param props
- * @returns {*}
- * @constructor
- */
+
 function AccountsEntity( props ) {
-    const history = useHistory()
+
     const [state, dispatch] = useReducer(reducer, initialState)
     /**
-     * props.match.params.id 是路由传过来的 id , props 来接收
+     * 接受路由传过来的参数 props
+     * props.match.params.id 是路由传过来的 id
      */
     const id = props.match.params.id
 
     useEffect(() => {
         dispatch({ type: 'TRUE_LOADING' })
-        /***
-         * Get Accounts (id)
-         * @param id
-         */
         axios.get(`${defaultUrl}/api/v1/accounts/${id}/statuses`)
             .then(res => {
                 dispatch({ type: 'FETCH_SUCCESS', payload: res.data })
             })
+            .catch(() => {
+                dispatch({ type: 'FETCH_ERROR' })
+            })
     },[id])
 
     const acct = state.data[0] && state.data[0].account
-    const resdata = state.data
+    const resData = state.data && state.data
 
+    const accountsStyle = {
+        margin: `1rem`
+    }
     return (
-        <>
-            {state.isLoading ? <Loading/> : <section className="accounts-entity">
-                <section style={{margin: `1rem 0`}}>
-                    <button className="goback-button" onClick={() => history.goBack()}>返回</button>
+
+        <section style={accountsStyle}>
+            <GoBack/>
+            {state.isLoading ? <Loading/> :
+                <section className="accounts-entity">
+                    <AccountsComponent account={acct} data={resData} err={state.error} />
                 </section>
-                <AccountsComponent account={acct} data={resdata} />}
-            </section>}
-            {state.error}
-        </>
+            }
+        </section>
     )
 }
 

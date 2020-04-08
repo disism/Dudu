@@ -42,7 +42,7 @@ function PublicTimelines() {
             .then(res => {
                 dispatch({ type: 'FETCH_SUCCESS', payload: res.data })
             })
-            .catch(err => {
+            .catch(() => {
                 dispatch({ type: 'FETCH_ERROR' })
             })
     },[])

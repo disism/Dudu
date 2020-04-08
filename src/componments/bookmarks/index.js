@@ -3,6 +3,7 @@ import {getHomeBookmarks} from "../../api/request";
 import DuduStatusComponent from "../status";
 import {useHistory} from "react-router-dom";
 import "./style.scss"
+import Loading from "../loading";
 
 function HomeBookmarksComponent() {
     const [data, setData] = useState([{
@@ -29,7 +30,7 @@ function HomeBookmarksComponent() {
         <section className="bookmarks">
             <button className="goback-button" onClick={() => history.goBack()}>返回</button>
             <div>收藏夹</div>
-            {isLoading ? <div className="loading">Loading...</div> : <DuduStatusComponent featchData={data} />}
+            {isLoading ? <Loading/> : <DuduStatusComponent featchData={data} />}
         </section>
     )
 }

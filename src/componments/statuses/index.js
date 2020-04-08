@@ -3,12 +3,15 @@ import "./style.scss"
 import axios from "axios"
 import HomeTimeLineComponent from "../timeline";
 import PersonalAccount from "../accounts/personal";
+import Loading from "../loading";
 
 function NewStatusesComponent() {
     const [statusValue, setStatusValue] = useState('')
     const [statusSend, setStatesSend] = useState('')
     const [refresh, setRefresh] = useState(false)
 
+    const [isLoading, setIsLoading] = useState(false)
+    
     /**
      * 调用发布业务组件并传给输入的 Value
      * @constructor
@@ -39,6 +42,7 @@ function NewStatusesComponent() {
             .then(() => {
                 setRefresh(true)
                 setStatesSend('发送成功')
+                setIsLoading(false)
             })
             .catch((() => {
                 setStatesSend('发送失败')
@@ -47,7 +51,6 @@ function NewStatusesComponent() {
 
     const SetTimeoutState = () => {
         return <div>{statusSend}</div>
-
     }
 
     return (
@@ -62,7 +65,9 @@ function NewStatusesComponent() {
             </div>
             <button type="button" onClick={SendStatus}>发布嘟文</button>
             <SetTimeoutState />
-            <HomeTimeLineComponent status={refresh} />
+            {isLoading ? <Loading/> :
+                <HomeTimeLineComponent status={refresh} />
+            }
         </section>
     )
 }

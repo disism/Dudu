@@ -1,12 +1,15 @@
 import React from "react";
 import "./style.scss"
+
 function Loading() {
     return (
-        <div className="balls">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+        <section className="balls-main">
+            <div className="balls">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </section>
     )
 }
 export default Loading
