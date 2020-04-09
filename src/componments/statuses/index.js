@@ -5,17 +5,18 @@ import HomeTimeLineComponent from "../timeline";
 import PersonalAccount from "../accounts/personal";
 import Loading from "../loading";
 
+/***
+ * 发布组件
+ * @returns {*}
+ * @constructor
+ */
 function NewStatusesComponent() {
     const [statusValue, setStatusValue] = useState('')
     const [statusSend, setStatesSend] = useState('')
     const [refresh, setRefresh] = useState(false)
 
     const [isLoading, setIsLoading] = useState(false)
-    
-    /**
-     * 调用发布业务组件并传给输入的 Value
-     * @constructor
-     */
+
     const SendStatus =() => {
         NewStatuses(statusValue)
         setStatusValue('')

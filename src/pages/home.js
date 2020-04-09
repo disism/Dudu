@@ -1,12 +1,12 @@
 import React from "react";
 import HeaderComponent from "../componments/header";
-import NewStatusesComponent from "../componments/statuses";
+import HomeComponent from "../componments/home";
 
 function Home() {
     return (
         <>
             <HeaderComponent/>
-            <NewStatusesComponent/>
+            <HomeComponent/>
         </>
     )
 }
