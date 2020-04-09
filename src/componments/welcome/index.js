@@ -108,46 +108,56 @@ function Welcome() {
         if (isCode) return ObtainTheToken()
     },[])
 
-
     return (
         <>
-            {state.authState}
-            {state.data.display_name
+            <h3 style={{textAlign: `center`}}>{state.authState}</h3>
+            {!state.data.display_name
                 ?
-            <div className="welcome-diaplay-name">
-                {state.data.display_name && `欢迎您：${state.data.display_name}`}
-            </div>
-                :
             <section>
                 {state.isloading ? <Loading/> :
-                    <section className="layout">
-                        <section className="welcome">
-                            <section className="welcome-image">
-                                <img src={homeWelcomeImage} alt="" />
-                            </section>
-                            <section className="welcome-inner">
-                                <div className="welcome-explore">
-                                    <div className="welcome-inner-title">看一看现在发生了什么</div>
-                                    <Link to="public">
-                                        <button>
-                                            <div>查看公开的信息流</div>
-                                        </button>
-                                    </Link>
-                                </div>
-
-                                <div className="welcome-login-registered">
-                                    <div className="welcome-inner-title">登录 / 注册</div>
-                                    <Link to="login">
-                                        <button>登录 / 注册</button>
-                                    </Link>
-                                </div>
-                            </section>
-                        </section>
-                    </section>
+                    <WelcomeSection />
                 }
+            </section>
+                :
+            <section>
+                <div className="welcome-diaplay-name">
+                    {state.data.display_name && `欢迎您：${state.data.display_name}`}
+                </div>
+                <div className="welcome-loading">
+                    <div></div>
+                </div>
             </section>
             }
         </>
+    )
+}
+
+const WelcomeSection = () => {
+    return (
+        <section className="layout">
+            <section className="welcome">
+                <section className="welcome-image">
+                    <img src={homeWelcomeImage} alt="" />
+                </section>
+                <section className="welcome-inner">
+                    <div className="welcome-explore">
+                        <div className="welcome-inner-title">看一看现在发生了什么</div>
+                        <Link to="public">
+                            <button>
+                                <div>查看公开的信息流</div>
+                            </button>
+                        </Link>
+                    </div>
+
+                    <div className="welcome-login-registered">
+                        <div className="welcome-inner-title">登录 / 注册</div>
+                        <Link to="login">
+                            <button>登录 / 注册</button>
+                        </Link>
+                    </div>
+                </section>
+            </section>
+        </section>
     )
 }
 

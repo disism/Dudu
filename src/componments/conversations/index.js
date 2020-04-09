@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useReducer} from "react";
 import {getConversations} from "../../api/request";
 import "./style.scss"
 import GoBack from "../back";
@@ -31,17 +31,34 @@ const Conversations = ({featchData}) => {
     )
 }
 
+const initialState = {
+    data: [],
+    isLoading: false
+}
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'FETCH_SUCCESS':
+            return {
+                data: action.payload,
+                isLoading: false
+            }
+        case 'LOADING_TRUE':
+            return {
+                data: {},
+                isLoading: true
+            }
+        default:
+            return state
+    }
+}
 function ConversationsComponent() {
-    const [isLoading, setIsLoading] = useState(true)
-    const [data, setData] = useState([{
-        last_status: {}
-    }])
+    const [state, dispatch] = useReducer(reducer, initialState)
 
     useEffect(() => {
+        dispatch({ type: 'LOADING_TRUE' })
         getConversations()
             .then(res => {
-                setData(res)
-                setIsLoading(false)
+                dispatch({ type: 'FETCH_SUCCESS', payload: res })
             })
     },[])
 
@@ -49,7 +66,7 @@ function ConversationsComponent() {
         <section className="conversations">
             <GoBack/>
             <div>私信</div>
-            {isLoading ? <Loading/>: <Conversations featchData={data} />}
+            {state.isLoading ? <Loading/>: <Conversations featchData={state.data} />}
         </section>
     )
 }

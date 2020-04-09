@@ -9,9 +9,8 @@ function LoginComponent() {
     const [example, setExample] = useState('mastodon.social')
     const requestUrl = `https://${example}`
 
-    const handleAuthorizeTheUser = () => {
-
-        console.log(requestUrl)
+    const handleAuthorizeTheUser = (e) => {
+        e.preventDefault()
         localStorage.setItem('dudu_settings_url', requestUrl)
         const authParameters = [
             `${requestUrl}/oauth/authorize?client_id=${CLIENT_ID}`,
@@ -22,6 +21,7 @@ function LoginComponent() {
         window.location.href=authParameters
     }
     const loginFocus = useRef(null)
+
     useEffect(() => {
         loginFocus.current.focus()
     },[])
@@ -31,16 +31,16 @@ function LoginComponent() {
             <div>
                 <section className="login">
                     <GoBack/>
-                    <div className="input-domain">
-                        <div style={{margin: `1rem 0`}}>输入你要登录的实例地址</div>
-                        <input
-                            ref={loginFocus}
-                            type="input"
-                            value={example}
-                            onChange={e => setExample(e.target.value)}
-                        />
-                        <button type="button" onClick={handleAuthorizeTheUser}>LOGIN</button>
-                    </div>
+                    <form onSubmit={handleAuthorizeTheUser} className="input-domain">
+                            <div style={{margin: `1rem 0`}}>输入你要登录的实例地址</div>
+                            <input
+                                ref={loginFocus}
+                                type="input"
+                                value={example}
+                                onChange={e => setExample(e.target.value)}
+                            />
+                            <button type="submit">LOGIN</button>
+                    </form>
                 </section>
             </div>
         </>
