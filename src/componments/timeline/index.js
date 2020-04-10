@@ -36,7 +36,6 @@ const reducer = (state, action) => {
 }
 function HomeTimeLineComponent() {
     const [state, dispatch] = useReducer(reducer, initialState)
-
     const [loadData, setLoadData] = useState([])
     const [idx, setIdx] = useState('')
 
@@ -57,7 +56,7 @@ function HomeTimeLineComponent() {
                 setIdx(res)
             })
     }
-    console.log(loadData)
+    // console.log(loadData)
     const LoadStatus = ({loadData}) => {
         return <DuduStatusComponent featchData={loadData} />
     }
@@ -66,21 +65,20 @@ function HomeTimeLineComponent() {
         <>
         <section className="components-main">
             <div>主页时间线</div>
-            {/*{*/}
-            {/*    state.isLoading*/}
-            {/*    ?*/}
-            {/*    <Loading/>*/}
-            {/*    :*/}
-            {/*    <DuduStatusComponent featchData={state.data} />*/}
-            {/*}*/}
 
-            {state.data && <DuduStatusComponent featchData={state.data} />}
+
+            {state.data
+                &&
+                <section>
+                    <DuduStatusComponent featchData={state.data} />
+                    <button type="button" onClick={handleLoadMoreTimeline}>加载更多</button>
+                </section>
+            }
             {loadData ?
                 <LoadStatus loadData={loadData}/>
                 :
                 null
             }
-            <button type="button" onClick={handleLoadMoreTimeline}>加载更多</button>
         </section>
         <Loading/>
         </>

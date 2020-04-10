@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import "./style.scss"
+import {deleteStatus} from "../../api/request";
 
 /***
  * @param featchData
@@ -8,6 +9,15 @@ import "./style.scss"
  * @constructor
  */
 function DuduStatusComponent({featchData}) {
+    const isUserSelf =  localStorage.getItem('user-id')
+
+    const handleDeleteStatus = (id) => {
+        deleteStatus(id)
+            .then(() => {
+                alert('删除成功!')
+                window.location.reload()
+            })
+    }
     return (
         <>
         {featchData && featchData.map((items, idx) => {
@@ -49,6 +59,13 @@ function DuduStatusComponent({featchData}) {
                             Like: {items.favourites_count} ·
                             回复： {items.replies_count} ·
                             转发： {items.reblogs_count} ·
+                            {
+                                items.account.id === isUserSelf
+                                ?
+                                <button onClick={() => handleDeleteStatus(items.id)}>删除嘟文</button>
+                                :
+                                null
+                            }
                         </div>
                     </section>
                 </div>

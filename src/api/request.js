@@ -40,3 +40,10 @@ export const getNotifications = () => axiosInstance.get('/api/v1/notifications')
  * @returns {Promise<AxiosResponse<T>>}
  */
 export const getAccounts = () => axiosInstance.get('/api/v1/accounts/verify_credentials')
+
+/***
+ * 删除嘟文状态
+ * @param id
+ * @returns {Promise<AxiosResponse<T>>}
+ */
+export const deleteStatus = (id) => axiosInstance.delete(`/api/v1/statuses/${id}`)
