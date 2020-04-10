@@ -2,7 +2,8 @@ import React from 'react';
 
 import {
     HashRouter as Router,
-    Route
+    Switch,
+    Route,
 } from "react-router-dom";
 
 import PublicPage from "./pages/public";
@@ -63,12 +64,14 @@ function Routers() {
             {routes.map((route, idx) => {
                 const { path, exact, routes } = route;
                 return (
-                    <Route key={idx} path={path}
-                        exact={exact}
-                        render={(routeProps) => (
-                            <route.component routes={routes} {...routeProps} />
-                        )}
-                    />
+                    <Switch key={idx}>
+                        <Route path={path}
+                            exact={exact}
+                            render={(routeProps) => (
+                                    <route.component routes={routes} {...routeProps} />
+                            )}
+                        />
+                    </Switch>
                 );
             })}
 

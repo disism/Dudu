@@ -28,14 +28,12 @@ const reducer = (state, action) => {
 
 function HomeFavouritesComponent() {
     const [state, dispatch] = useReducer(reducer, initialState)
-
     useEffect(() => {
         dispatch({ type: 'LOADING_TRUE' })
         getHomeFavourites()
             .then(res => {
                 dispatch({ type: 'FETCH_SUCCESS', payload: res })
             })
-        return undefined
     }, [])
 
     console.log(state.data)

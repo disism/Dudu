@@ -35,12 +35,6 @@ const reducer = (state, action) => {
                 authState: '',
                 isloading: true
             }
-        case 'LOADING_FALSE':
-            return {
-                data: {},
-                authState: '',
-                isloading: false
-            }
         case 'AUTH_ERROR':
             return {
                 data: {},
@@ -77,7 +71,6 @@ function Welcome() {
                 .then(res => {
                     localStorage.setItem('dudu_access_token', res.data.access_token)
                     WelcomeAccountEntity()
-                    dispatch({ type: 'LOADING_FALSE' })
                 })
                 .catch(() => {
                     dispatch({ type: 'GET_TOKEN_ERROR' })
@@ -96,6 +89,7 @@ function Welcome() {
             })
                 .then(res => {
                     dispatch({ type: 'LOGIN_SUCCESS', payload: res.data })
+                    localStorage.setItem('user-id', res.data.id)
                     setTimeout(() => {
                         return window.location.href = "/#/home"
                     }, 1000)
@@ -111,22 +105,22 @@ function Welcome() {
     return (
         <>
             <h3 style={{textAlign: `center`}}>{state.authState}</h3>
-            {!state.data.display_name
+            {state.data.display_name
                 ?
-            <section>
-                {state.isloading ? <Loading/> :
-                    <WelcomeSection />
-                }
-            </section>
+                <section>
+                    <div className="welcome-diaplay-name">
+                        {state.data.display_name && `欢迎您：${state.data.display_name}`}
+                    </div>
+                    <div className="welcome-loading">
+                        <div></div>
+                    </div>
+                </section>
                 :
-            <section>
-                <div className="welcome-diaplay-name">
-                    {state.data.display_name && `欢迎您：${state.data.display_name}`}
-                </div>
-                <div className="welcome-loading">
-                    <div></div>
-                </div>
-            </section>
+                <section>
+                    {state.isloading ? <Loading/> :
+                        <WelcomeSection />
+                    }
+                </section>
             }
         </>
     )
