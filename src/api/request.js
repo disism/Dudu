@@ -6,8 +6,7 @@ import {axiosInstance} from "./config";
  */
 export const getHomeTimelines = (max_id) => axiosInstance.get('/api/v1/timelines/home',{
     params: {
-        "max_id": max_id,
-        "limit": 2
+        "max_id": max_id
     }
 })
 

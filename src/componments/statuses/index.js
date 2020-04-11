@@ -48,7 +48,7 @@ function NewStatusesComponent() {
     const SetTimeoutState = () => {
         return (
             <>
-                {isLoading ? <h3>Loading ...</h3> :  <h3>{statusSend}</h3>}
+                {isLoading ? <h3>Loading ...</h3> : <h3>{statusSend}</h3>}
             </>
         )
     }

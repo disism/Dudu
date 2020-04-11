@@ -1,11 +1,3 @@
-import React from 'react';
-
-import {
-    HashRouter as Router,
-    Switch,
-    Route,
-} from "react-router-dom";
-
 import PublicPage from "./pages/public";
 import AccountsEntity from "./componments/accounts";
 import HomeFavourites from "./pages/favourites";
@@ -16,7 +8,7 @@ import LoginPage from "./pages/login";
 import Verification from "./componments/verification";
 import Home from "./pages/home";
 
-const routes = [
+export const routes = [
     {
         path: "/",
         exact: true,
@@ -55,28 +47,3 @@ const routes = [
         component: AccountsEntity
     }
 ]
-
-
-function Routers() {
-    return (
-        <Router>
-
-            {routes.map((route, idx) => {
-                const { path, exact, routes } = route;
-                return (
-                    <Switch key={idx}>
-                        <Route path={path}
-                            exact={exact}
-                            render={(routeProps) => (
-                                    <route.component routes={routes} {...routeProps} />
-                            )}
-                        />
-                    </Switch>
-                );
-            })}
-
-        </Router>
-    )
-}
-
-export default Routers
