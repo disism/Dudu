@@ -24,6 +24,13 @@ const reducer = (state, action) => {
                 moreLoad: false
             }
         }
+        case 'LOADING_FALSE': {
+            return {
+                data: [],
+                isLoading: false,
+                moreLoad: false
+            }
+        }
         case  'LOAD_MORE_SUCCESS':
             return {
                 data: [],
@@ -34,10 +41,11 @@ const reducer = (state, action) => {
             return state
     }
 }
+
 function HomeTimeLineComponent() {
     const [state, dispatch] = useReducer(reducer, initialState)
-    const [loadData, setLoadData] = useState([])
     const [idx, setIdx] = useState('')
+    const [loadMoreResultArray, setLoadMoreResultArray] = useState([])
 
     useEffect(() => {
         dispatch({ type: 'LOADING_TRUE' })
@@ -45,42 +53,30 @@ function HomeTimeLineComponent() {
             .then(res => {
                 dispatch({ type: 'FETCH_SUCCESS', payload: res })
                 setIdx(res)
+                setLoadMoreResultArray([...res])
             })
     },[])
 
     const handleLoadMoreTimeline = () => {
+        dispatch({ type: 'LOADING_TRUE' })
         const maxId = idx[0] && idx[state.data.length - 1].id
         getHomeTimelines(`${maxId}`)
             .then(res => {
-                setLoadData(res)
+                loadMoreResultArray.push(res)
                 setIdx(res)
+                dispatch({ type: 'LOADING_FALSE' })
             })
     }
-    // console.log(loadData)
-    const LoadStatus = ({loadData}) => {
-        return <DuduStatusComponent featchData={loadData} />
-    }
+
+    const loadMoreData = loadMoreResultArray.flat(1)
 
     return (
         <>
         <section className="components-main">
             <div>主页时间线</div>
-
-
-            {state.data
-                &&
-                <section>
-                    <DuduStatusComponent featchData={state.data} />
-                    <button type="button" onClick={handleLoadMoreTimeline}>加载更多</button>
-                </section>
-            }
-            {loadData ?
-                <LoadStatus loadData={loadData}/>
-                :
-                null
-            }
+            {state.isLoading ? <Loading /> : <DuduStatusComponent featchData={loadMoreData}/>}
+            <button className="button" type="button" onClick={handleLoadMoreTimeline}>加载更多</button>
         </section>
-        <Loading/>
         </>
     )
 }

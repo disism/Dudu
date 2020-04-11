@@ -1,12 +1,19 @@
 import React from 'react';
 import "./assets/scss/global.scss"
-import Routers from "./routers"
+import { renderRoutes } from "react-router-config"
+import {
+    BrowserRouter as Router,
+    Switch
+} from "react-router-dom";
+import {routes} from "./routers";
 
 function App() {
   return (
-      <>
-          <Routers/>
-      </>
+      <Router>
+          <Switch>
+              {renderRoutes(routes)}
+          </Switch>
+      </Router>
   );
 }
 
