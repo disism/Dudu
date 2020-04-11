@@ -46,3 +46,13 @@ export const getAccounts = () => axiosInstance.get('/api/v1/accounts/verify_cred
  * @returns {Promise<AxiosResponse<T>>}
  */
 export const deleteStatus = (id) => axiosInstance.delete(`/api/v1/statuses/${id}`)
+
+/***
+ * 搜索功能
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const search = (query) => axiosInstance.get('/api/v2/search',{
+    params: {
+        q: query
+    }
+})

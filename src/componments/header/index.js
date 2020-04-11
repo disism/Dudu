@@ -15,6 +15,7 @@ function HeaderComponent() {
             <Link to="/bookmarks">收藏</Link>
             <Link to="/conversations">私信</Link>
             <Link to="/notifications">通知</Link>
+            <Link to="/search">搜索</Link>
             <Link to="/public">公开时间轴</Link>
             <button type="button" onClick={handleLogout}>退出</button>
         </header>

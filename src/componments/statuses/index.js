@@ -11,7 +11,7 @@ import PersonalAccount from "../accounts/personal";
 
 function NewStatusesComponent() {
     const [statusValue, setStatusValue] = useState('')
-    const [statusSend, setStatesSend] = useState('')
+    const [statusSend, setStatesSend] = useState('发布嘟文')
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -45,13 +45,6 @@ function NewStatusesComponent() {
             }))
     }
 
-    const SetTimeoutState = () => {
-        return (
-            <>
-                {isLoading ? <h3>Loading ...</h3> : <h3>{statusSend}</h3>}
-            </>
-        )
-    }
 
     return (
         <section className="new-statuses">
@@ -63,8 +56,9 @@ function NewStatusesComponent() {
                     onChange={e => setStatusValue(e.target.value)}
                 />
             </div>
-            <button type="button" onClick={SendStatus}>发布嘟文</button>
-            <SetTimeoutState />
+            <button type="button" onClick={SendStatus}>
+                {isLoading ? 'Loading ...' : statusSend}
+            </button>
         </section>
     )
 }
