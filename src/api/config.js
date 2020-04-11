@@ -20,10 +20,7 @@ const axiosInstance = axios.create({
 })
 
 axiosInstance.interceptors.response.use(
-    res => res.data,
-    err => {
-        console.log(err, '链接出现错误，请登陆后尝试！')
-    }
+    res => res.data
 )
 
 export {

@@ -2,8 +2,8 @@ import React from 'react';
 import "./assets/scss/global.scss"
 import { renderRoutes } from "react-router-config"
 import {
-    BrowserRouter as Router,
-    Switch
+    HashRouter as Router,
+    Switch,
 } from "react-router-dom";
 import {routes} from "./routers";
 

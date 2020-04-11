@@ -1,5 +1,5 @@
 import React from "react";
-import DuduArticle from "../dudu-acticle";
+import DuduStatusComponent from "../status";
 
 const AccountsComponent = ({account, data, err}) => {
     return (
@@ -29,7 +29,7 @@ const AccountsComponent = ({account, data, err}) => {
                     </div>
                 </section>
                 <section>
-                    <DuduArticle fetchData={data} />
+                    <DuduStatusComponent featchData={data} />
                 </section>
             </section>
             }

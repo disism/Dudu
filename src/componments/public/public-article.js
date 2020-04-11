@@ -9,7 +9,7 @@ import "./style.scss"
  * @returns {*}
  * @constructor
  */
-const DuduArticle =　({fetchData}) => {
+const PublicArticle =　({fetchData}) => {
     return (
         <section className="dudu-layout">
             {fetchData.map((items, idx) => {
@@ -44,4 +44,4 @@ const DuduArticle =　({fetchData}) => {
     )
 }
 
-export default DuduArticle
+export default PublicArticle

@@ -7,6 +7,7 @@ import HomeBookmarks from "./pages/bookmarks";
 import LoginPage from "./pages/login";
 import Verification from "./componments/verification";
 import Home from "./pages/home";
+import SearchPage from "./pages/search";
 
 export const routes = [
     {
@@ -45,5 +46,9 @@ export const routes = [
     {
         path: "/account/:id/statuses",
         component: AccountsEntity
+    },
+    {
+        path: "/search",
+        component: SearchPage
     }
 ]
