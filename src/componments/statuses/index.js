@@ -1,7 +1,8 @@
 import React, { useState} from "react";
 import "./style.scss"
-import axios from "axios"
 import PersonalAccount from "../accounts/personal";
+import {postNewStatuses} from "../../api/request";
+import LoadmoreLoading from "../loading/loadmore-loading";
 
 /***
  * 发布嘟文组件
@@ -12,7 +13,6 @@ import PersonalAccount from "../accounts/personal";
 function NewStatusesComponent() {
     const [statusValue, setStatusValue] = useState('')
     const [statusSend, setStatesSend] = useState('发布嘟文')
-
     const [isLoading, setIsLoading] = useState(false)
 
     const SendStatus =() => {
@@ -25,19 +25,14 @@ function NewStatusesComponent() {
             return setStatesSend('请输入嘟文')
         }
         setIsLoading(true)
-        axios.post( `${localStorage.getItem('dudu_settings_url')}/api/v1/statuses`,{
+        postNewStatuses({
             status: status,
             media_ids: null,
             poll: null
-        },{
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('dudu_access_token')}`
-            }
         })
             .then(() => {
                 setIsLoading(false)
                 setStatesSend('发送成功')
-                window.location.reload()
             })
             .catch((() => {
                 setIsLoading(false)
@@ -57,7 +52,7 @@ function NewStatusesComponent() {
                 />
             </div>
             <button type="button" onClick={SendStatus}>
-                {isLoading ? 'Loading ...' : statusSend}
+                {isLoading ? <LoadmoreLoading /> : statusSend}
             </button>
         </section>
     )

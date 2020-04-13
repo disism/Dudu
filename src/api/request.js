@@ -56,3 +56,19 @@ export const search = (query) => axiosInstance.get('/api/v2/search',{
         q: query
     }
 })
+
+/***
+ * 发送嘟文
+ * @param params
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const postNewStatuses = (params) => axiosInstance.post('/api/v1/statuses',params)
+
+/***
+ *
+ * @param params
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const subscribeToPushNotifications = (params) => axiosInstance.post('/api/v1/push/subscription', params)
+
+export const getSubscribeStatus = () => axiosInstance.get('/api/v1/push/subscription')
