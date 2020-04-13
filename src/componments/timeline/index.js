@@ -3,6 +3,7 @@ import {getHomeTimelines} from "../../api/request";
 import "./style.scss"
 import DuduStatusComponent from "../status";
 import Loading from "../loading";
+import LoadmoreLoading from "../loading/loadmore-loading";
 
 const initialState = {
     data: [],
@@ -48,6 +49,7 @@ function HomeTimeLineComponent() {
             })
     },[])
 
+
     const handleLoadMoreTimeline = () => {
         setLoadMoreLoading(true)
         const maxId = idx[0] && idx[state.data.length - 1].id
@@ -77,10 +79,11 @@ function HomeTimeLineComponent() {
                 type="button"
                 onClick={handleLoadMoreTimeline}
             >
-                {loadMoreLoading ? 'Loading...' : '加载更多'}
+                {loadMoreLoading ? <LoadmoreLoading /> : '加载更多'}
             </button>
         </section>
         </>
     )
 }
+
 export default HomeTimeLineComponent

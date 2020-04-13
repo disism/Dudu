@@ -15,9 +15,10 @@ export const baseUrl = localStorage.getItem('dudu_settings_url')
 const axiosInstance = axios.create({
     baseURL: baseUrl,
     headers: {
-        'Authorization': `Bearer ${localStorage.getItem('dudu_access_token')}`
+            'Authorization': `Bearer ${localStorage.getItem('dudu_access_token')}`
     }
 })
+
 
 axiosInstance.interceptors.response.use(
     res => res.data
