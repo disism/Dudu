@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 
 function Streaming() {
-
+    const [event] = useState([])
     const access_token = localStorage.getItem('dudu_access_token')
     const streamApiUrl = localStorage.getItem('dudu_settings_url').replace('https://', 'wss://')
 
@@ -14,7 +14,8 @@ function Streaming() {
 
         // 监听服务端消息(接收消息)
         ws.onmessage = e => {
-            console.log(e.data)
+            event.push(e.data)
+            document.title = `DUDU ${event.length} 条新消息！`
         };
 
         // 监听连接失败
@@ -28,11 +29,10 @@ function Streaming() {
             console.log('连接关闭');
         };
 
-    },[streamApiUrl, access_token])
+    },[streamApiUrl, access_token, event])
 
     return (
         <>
-
         </>
     )
 }
