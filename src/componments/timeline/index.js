@@ -4,6 +4,8 @@ import "./style.scss"
 import DuduStatusComponent from "../status";
 import Loading from "../loading";
 import LoadmoreLoading from "../loading/loadmore-loading";
+import {useSelector} from "react-redux";
+import {notificationData} from "../streaming/notificationSlice";
 
 const initialState = {
     data: [],
@@ -36,8 +38,14 @@ function HomeTimeLineComponent() {
     const [loadMoreResultArray, setLoadMoreResultArray] = useState([])
     const [loadMoreLoading, setLoadMoreLoading] = useState(false)
 
+    const data = useSelector(notificationData)
+
     useEffect(() => {
         dispatch({ type: 'LOADING_TRUE' })
+        getTimeLine()
+    },[])
+
+    const getTimeLine = () => {
         getHomeTimelines('')
             .then(res => {
                 dispatch({ type: 'FETCH_SUCCESS', payload: res })
@@ -47,8 +55,11 @@ function HomeTimeLineComponent() {
             .catch(res => {
                 console.log(`${res} 获取主页数据失败！`)
             })
-    },[])
+    }
 
+    if(data.event === 'update') {
+        getTimeLine()
+    }
 
     const handleLoadMoreTimeline = () => {
         setLoadMoreLoading(true)
