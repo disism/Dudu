@@ -77,10 +77,3 @@ export const subscribeToPushNotifications = (params) => axiosInstance.post('/api
  */
 export const getSubscribeStatus = () => axiosInstance.get('/api/v1/push/subscription')
 
-/***
- * 查询 SSE
- * @returns {Promise<AxiosResponse<any>>}
- */
-export const getStreamingHealth = ()=> axiosInstance.get('/api/v1/streaming/health')
-
-export const getStreamingUser = () => axiosInstance.get('/api/v1/streaming/user/')

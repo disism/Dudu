@@ -3,10 +3,11 @@ import "./style.scss"
 import {getNotifications} from "../../api/request";
 import GoBack from "../back";
 import Loading from "../loading";
-import WebPushApi from "../push";
-import Streaming from "../streaming";
+import {useDispatch} from "react-redux";
+import {NOTIFICATION_DEFAULT} from "../streaming/notificationSlice";
 
 function NotificationsComponents() {
+    const dispatch = useDispatch()
     const [data, setData] = useState([{
         status: {},
         type: ""
@@ -18,16 +19,15 @@ function NotificationsComponents() {
             .then(res => {
                 setData(res)
                 setIsLoading(false)
+                dispatch(NOTIFICATION_DEFAULT())
             })
             .catch(err => {
                 console.log(err)
             })
-    },[])
+    },[dispatch])
 
     return (
         <section className="notifications">
-            <WebPushApi />
-            <Streaming />
             <GoBack/>
             <div>通知</div>
             {isLoading ? <Loading/> : <div>{data && data.map((items, idx) => {
