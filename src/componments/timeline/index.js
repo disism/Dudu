@@ -66,6 +66,9 @@ function HomeTimeLineComponent() {
         const maxId = idx[0] && idx[state.data.length - 1].id
         getHomeTimelines(`${maxId}`)
             .then(res => {
+                /**
+                 * 加载更多 Push 数组中
+                 */
                 loadMoreResultArray.push(res)
                 setIdx(res)
                 setLoadMoreLoading(false)

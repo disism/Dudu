@@ -1,6 +1,5 @@
 import React, { useState} from "react";
 import "./style.scss"
-import PersonalAccount from "../accounts/personal";
 import {postNewStatuses} from "../../api/request";
 import LoadmoreLoading from "../loading/loadmore-loading";
 
@@ -43,7 +42,6 @@ function NewStatusesComponent() {
 
     return (
         <section className="new-statuses">
-            <PersonalAccount/>
             <div>新嘟文</div>
             <div>
                 <textarea

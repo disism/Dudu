@@ -1,10 +1,14 @@
+@import "../../assets/scss/var.scss";
+
 .new-statuses {
+  margin: 1rem;
   textarea {
     outline: none;
-    border: 2px dashed #2b90d9;
+    border: 2px solid #2b90d9;
     border-radius: 0.4rem;
     width: 50vw;
     height: 10vw;
+    background-color: #d9e1e8;
   }
 
   button {
