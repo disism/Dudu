@@ -1,3 +1,54 @@
+@import "../../assets/scss/var.scss";
+
 .home {
   margin: 1rem;
+
+  .home-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @media (max-width: $mobile) {
+      flex-direction: column;
+      .home-message {
+        display: none;
+      }
+    }
+  }
+
+  .home-header {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #d9e1e8;
+    .home-header-left {
+      display: flex;
+      :not(:first-child) {
+        margin: 0 1rem;
+      }
+    }
+    .home-header-right {
+      display: flex;
+      :not(:last-child) {
+        margin: 0 1rem;
+      }
+      .header-new-notification {
+        border-radius: 50%;
+        background-color: antiquewhite;
+        height: 3rem;
+        line-height: 3rem;
+        width: 3rem;
+        text-align: center;
+      }
+    }
+  }
+
+  .header-new-statuses {
+    display: flex;
+    justify-content: center;
+    background-color: #2b90d9;
+    border-radius: 0.5rem;
+  }
 }

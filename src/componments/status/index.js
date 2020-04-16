@@ -15,7 +15,6 @@ function DuduStatusComponent({featchData}) {
         deleteStatus(id)
             .then(() => {
                 alert('删除成功!')
-                window.location.reload()
             })
     }
     return (
