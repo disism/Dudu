@@ -5,65 +5,55 @@ import DuduStatusComponent from "../status";
 import Loading from "../loading";
 import LoadmoreLoading from "../loading/loadmore-loading";
 import {useSelector} from "react-redux";
-import {notificationData} from "../streaming/notificationSlice";
+import {notificationData} from "../../reducer/notification";
 
 const initialState = {
-    data: [],
-    isLoading: false,
-    moreLoad: false
+    loadMoreLoading: false,
+    isLoading: true
 }
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'FETCH_SUCCESS':
+        case 'LOADMORE_TRUE':
             return {
-                data: action.payload,
-                isLoading: false,
-                moreLoad: false
+                loadMoreLoading: true
             }
-        case 'LOADING_TRUE': {
+        case 'LOAMORE_FALSE':
             return {
-                data: [],
-                isLoading: true,
-                moreLoad: false
+                loadMoreLoading: false
             }
-        }
+        case 'ISLOADING_FALSE':
+            return {
+                isLoading: false
+            }
         default:
             return state
     }
 }
-
 function HomeTimeLineComponent() {
     const [state, dispatch] = useReducer(reducer, initialState)
-    const [idx, setIdx] = useState('')
-    const [loadMoreResultArray, setLoadMoreResultArray] = useState([])
-    const [loadMoreLoading, setLoadMoreLoading] = useState(false)
 
+    const [idx, setIdx] = useState('')
     const data = useSelector(notificationData)
+    const [loadMoreResultArray, setLoadMoreResultData] = useState([])
 
     useEffect(() => {
-        dispatch({ type: 'LOADING_TRUE' })
-        getTimeLine()
-    },[])
-
-    const getTimeLine = () => {
-        getHomeTimelines('')
-            .then(res => {
-                dispatch({ type: 'FETCH_SUCCESS', payload: res })
-                setIdx(res)
-                setLoadMoreResultArray([...res])
-            })
-            .catch(res => {
-                console.log(`${res} 获取主页数据失败！`)
-            })
-    }
-
-    if(data.event === 'update') {
-        getTimeLine()
-    }
+        const getStatueesData = async () => {
+            await getHomeTimelines('')
+                .then(res => {
+                    dispatch({ type: 'ISLOADING_FALSE' })
+                    setIdx(res)
+                    setLoadMoreResultData([...res])
+                })
+                .catch(res => {
+                    console.log(`${res} 获取主页数据失败！`)
+                })
+        }
+        getStatueesData()
+    },[data, dispatch])
 
     const handleLoadMoreTimeline = () => {
-        setLoadMoreLoading(true)
-        const maxId = idx[0] && idx[state.data.length - 1].id
+        dispatch({ type: 'LOADMORE_TRUE' })
+        const maxId = idx[0] && idx[loadMoreResultArray.length - 1].id
         getHomeTimelines(`${maxId}`)
             .then(res => {
                 /**
@@ -71,7 +61,7 @@ function HomeTimeLineComponent() {
                  */
                 loadMoreResultArray.push(res)
                 setIdx(res)
-                setLoadMoreLoading(false)
+                dispatch({ type: 'ISLOADING_FALSE' })
             })
     }
 
@@ -84,16 +74,16 @@ function HomeTimeLineComponent() {
             {
                 state.isLoading
                 ?
-                <Loading />
+                    <Loading />
                 :
-                <DuduStatusComponent featchData={loadMoreData}/>
+                    <DuduStatusComponent featchData={loadMoreData}/>
             }
             <button
                 className="button"
                 type="button"
                 onClick={handleLoadMoreTimeline}
             >
-                {loadMoreLoading ? <LoadmoreLoading /> : '加载更多'}
+                {state.loadMoreLoading ? <LoadmoreLoading /> : '加载更多'}
             </button>
         </section>
         </>

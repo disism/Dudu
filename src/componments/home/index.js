@@ -4,7 +4,7 @@ import HomeTimeLineComponent from "../timeline";
 import "./style.scss"
 import Streaming from "../streaming";
 import {useSelector} from "react-redux";
-import {notificationCount, notificationData} from "../streaming/notificationSlice";
+import {notificationCount, notificationData} from "../../reducer/notification";
 import HeaderComponent from "../header";
 
 const NotificationMessage = () => {
@@ -71,7 +71,10 @@ function HomeComponent() {
                 </div>
             </section>
             <div className="header-new-statuses">
-                {boo && <NewStatusesComponent/>}
+                {boo && <div>
+                    <NewStatusesComponent/>
+                    <div onClick={handleBoo}>关闭</div>
+                </div>}
             </div>
             <Streaming />
             <section className="home-main">

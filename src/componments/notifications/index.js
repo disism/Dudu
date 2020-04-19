@@ -4,7 +4,7 @@ import {getNotifications} from "../../api/request";
 import GoBack from "../back";
 import Loading from "../loading";
 import {useDispatch} from "react-redux";
-import {NOTIFICATION_DEFAULT} from "../streaming/notificationSlice";
+import {NOTIFICATION_DEFAULT} from "../../reducer/notification";
 
 function NotificationsComponents() {
     const dispatch = useDispatch()
