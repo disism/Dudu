@@ -5,6 +5,11 @@ import {useHistory} from "react-router-dom";
 import "./style.scss"
 import Loading from "../loading";
 
+/**
+ * 收藏功能组件
+ * @returns {*}
+ * @constructor
+ */
 function HomeBookmarksComponent() {
     const [data, setData] = useState([{
         account:{},

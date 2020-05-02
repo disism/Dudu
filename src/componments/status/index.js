@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import "./style.scss"
 import {deleteStatus} from "../../api/request";
@@ -10,13 +10,19 @@ import {deleteStatus} from "../../api/request";
  */
 function DuduStatusComponent({featchData}) {
     const isUserSelf =  localStorage.getItem('user-id')
+    const [deleteStatusState, setDeleteStatusState] = useState('')
 
     const handleDeleteStatus = (id) => {
         deleteStatus(id)
             .then(() => {
-                alert('删除成功!')
+                setDeleteStatusState('删除成功！')
+            })
+            .catch(() => {
+                setDeleteStatusState('删除失败！')
             })
     }
+
+    console.log(deleteStatusState)
     return (
         <>
         {featchData && featchData.map((items, idx) => {

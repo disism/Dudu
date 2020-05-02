@@ -2,13 +2,14 @@ import React from "react";
 import PublicTimelines from "../componments/public";
 import GoBack from "../componments/back";
 
+/**
+ * 公开时间轴
+ * @returns {*}
+ * @constructor
+ */
 function PublicPage() {
-
-    const publicStyle = {
-        margin: `1rem`
-    }
     return (
-        <section style={publicStyle}>
+        <section style={{margin: `1rem`}}>
             <GoBack/>
             <PublicTimelines/>
         </section>

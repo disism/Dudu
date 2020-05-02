@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useDispatch} from "react-redux";
-import {NOTIFICATION_DATA, NOTIFICATION_INCREMENT} from "./notificationSlice";
+import {NOTIFICATION_DATA, NOTIFICATION_INCREMENT} from "../../reducer/notification";
 
 function Streaming() {
     const dispatch = useDispatch()

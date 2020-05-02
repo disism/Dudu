@@ -1,6 +1,6 @@
 import{ createSlice } from "@reduxjs/toolkit";
 
-export const notificationSlice = createSlice({
+export const notification = createSlice({
     name: 'notification',
     initialState: {
         value: 0,
@@ -19,9 +19,9 @@ export const notificationSlice = createSlice({
     }
 })
 
-export const { NOTIFICATION_INCREMENT, NOTIFICATION_DEFAULT, NOTIFICATION_DATA } = notificationSlice.actions
+export const { NOTIFICATION_INCREMENT, NOTIFICATION_DEFAULT, NOTIFICATION_DATA } = notification.actions
 
 export const notificationCount = state => state.notification.value
 export const notificationData = state => state.notification.data
 
-export default notificationSlice.reducer
+export default notification.reducer

@@ -1,6 +1,14 @@
 import React from "react";
 import DuduStatusComponent from "../status";
 
+/**
+ * 账户组件
+ * @param account
+ * @param data
+ * @param err
+ * @returns {*}
+ * @constructor
+ */
 const AccountsComponent = ({account, data, err}) => {
     return (
         <>
@@ -17,7 +25,7 @@ const AccountsComponent = ({account, data, err}) => {
                     <div className="accounts-entity-introduction">
                         <div>名字：{account.display_name}</div>
                         个人简介：
-                        <div dangerouslySetInnerHTML={{__html:account.note}}></div>
+                        <div dangerouslySetInnerHTML={{__html: account.note}}/>
                         <div>加入于： {account.created_at}</div>
                         <div>
 

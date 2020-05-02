@@ -2,7 +2,7 @@ import React from "react";
 import "./style.scss"
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {notificationCount, notificationData} from "../streaming/notificationSlice";
+import {notificationCount, notificationData} from "../../reducer/notification";
 
 function HeaderComponent() {
     const count = useSelector(notificationCount)
