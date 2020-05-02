@@ -8,6 +8,7 @@ import LoginPage from "./pages/login";
 import Verification from "./componments/verification";
 import Home from "./pages/home";
 import SearchPage from "./pages/search";
+import NotFound from "./pages/404";
 
 export const routes = [
     {
@@ -50,5 +51,8 @@ export const routes = [
     {
         path: "/search",
         component: SearchPage
+    },
+    {
+        component: NotFound
     }
 ]
